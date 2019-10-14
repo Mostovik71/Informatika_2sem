@@ -1,0 +1,42 @@
+package com.company;
+        import java.util.ArrayDeque;
+        import java.util.Scanner;
+public class first_b {
+    public static void main(String[] args) {
+        System.out.println("Введите число(очередь)");
+        first_b();
+    }
+
+    public static void first_b() {
+
+        Scanner scn = new Scanner(System.in);
+
+        int a = scn.nextInt();
+
+        ArrayDeque<Integer> deque = new ArrayDeque<>();
+
+        int i = 0, s = a;
+
+
+
+        while (s != 0) {
+            i++;
+            s /= 10;
+        }
+        while (i != 0) {
+            i--;
+            deque.push((int) ((a / Math.pow(10, i)) % 10));
+        }
+        while (deque.peek() != null) {
+            System.out.print(deque.pop());
+        }
+        System.out.println();
+        while (a != 0) {
+            deque.push((int) (a % 10));
+            a /= 10;
+        }
+        while (deque.peek() != null) {
+            System.out.print(deque.pop());
+        }
+    }
+}

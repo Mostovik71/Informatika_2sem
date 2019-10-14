@@ -1,0 +1,57 @@
+package com.company;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.*;
+import java.io.*;
+public class second_b {
+    public static void main(String[]args){
+        second_b();
+    }
+
+
+
+    public static void second_b(){
+        try {
+            File file = new File("\\Users\\Vlad\\Desktop\\Люди.txt");
+            FileReader fr = new FileReader(file);
+            BufferedReader reader = new BufferedReader(fr);
+            String line;
+            int k = 0;
+            methods[] ts = new methods[5];
+            Stack<String>  stack = new Stack<>();
+            Stack<String>  stack_odl = new Stack<>();
+            while ((line=reader.readLine())!=null){
+                ts[k] = new methods(line);
+                stack.push(line);
+                k++;
+            }
+            for (int i = ts.length-1; i > -1; i--) {
+                if (people(ts[i])) System.out.println(stack.pop());
+                else stack_odl.push(stack.pop());
+            }
+            while (!stack_odl.empty()){
+                System.out.println(stack_odl.pop());
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    public static boolean people (methods bit) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
+        try {
+            Date now = dateFormat.parse("27.09.2019");
+            Date date = dateFormat.parse(bit.birthday());
+            int age = (int)((now.getTime() - date.getTime())/24 / 60 / 60 / 1000 /365);
+            return age<40;
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+
+
+}

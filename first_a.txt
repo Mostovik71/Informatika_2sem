@@ -1,0 +1,67 @@
+package com.company;
+
+
+import java.util.Scanner;
+import java.util.Stack;
+public class first_a {
+
+    public static void main(String[] args) {
+ System.out.println("Введите число(стек)");
+
+ first_a();
+
+    }
+
+
+    public static void first_a() {
+
+        Scanner scn = new Scanner(System.in);
+
+        int a = scn.nextInt();
+
+        Stack<Byte> spisok = new Stack<>();
+
+        int i = 0, s = a;
+
+        while (a != 0) {
+
+            spisok.push((byte) (a % 10));
+
+            a /= 10;
+
+        }
+
+        while (!spisok.empty()) {
+
+            System.out.print(spisok.pop());
+
+        }
+
+        System.out.println();
+
+        a = s;
+
+        while (s != 0) {
+
+            i++;
+
+            s /= 10;
+
+        }
+
+        while (i != 0) {
+
+            i--;
+
+            spisok.push((byte) ((a / Math.pow(10, i)) % 10));
+
+        }
+
+        while (!spisok.empty()) {
+
+            System.out.print(spisok.pop());
+
+        }
+
+    }
+}
