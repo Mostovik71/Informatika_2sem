@@ -1,0 +1,75 @@
+package com.company;
+
+import java.util.ArrayList;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.*;
+import java.util.Arrays;
+import java.util.Collections;
+
+public class fifth  {
+    public static void main(String[] args) {
+        fifth();
+    }
+
+    public static void fifth() {
+        try {
+
+
+            File file = new File("\\C:\\Users\\mosto\\Desktop\\Люди.txt");
+            FileReader fr = new FileReader(file);
+            BufferedReader reader = new BufferedReader(fr);
+
+ArrayList<String> arraylist= new ArrayList<>();
+
+String str;
+
+            while ((str=reader.readLine())!=null){
+                arraylist.add(str);System.out.println();
+}
+            arraylist.sort((str1, str2) -> {  //Сортировка по длине
+                if (str1.length() != str2.length())
+                    return str1.length() - str2.length();
+
+                else
+                    return str1.compareTo(str2);
+
+            });
+
+            System.out.println(arraylist);
+
+
+            Collections.sort(arraylist);   //Лекисческая сортировка(по алфавиту)
+            for (String string : arraylist) {
+                System.out.println(string);
+            }
+
+
+
+            arraylist.sort((str1, str2) -> {     //Сортировка по заглавным
+                int k = 0, l = 0;
+                for (int i = 0; i < str1.length(); i++)
+                    if (Character.isUpperCase(str1.charAt(i))) k++;
+                for (int i = 0; i < str2.length(); i++)
+                    if (Character.isUpperCase(str2.charAt(i))) l++;
+                if (k != l)
+                    return k-l;
+                else
+                    return str1.compareTo(str2);
+            });
+            System.out.println(arraylist);
+
+
+
+
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
+    }
+}
