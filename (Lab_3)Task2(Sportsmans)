@@ -1,0 +1,106 @@
+package com.company;
+import java.io.File;
+import java.util.ArrayList;
+import java.util.Scanner;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+
+public class task2 {
+
+    public static void main(String[] args) {
+
+        competition();
+
+    }
+
+
+
+    public static void competition() {
+        ArrayList<sportsman> sportsmans = new ArrayList<>();
+        try {
+            File fXmlFile = new File("sportsmans.xml");
+            DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+            Document doc = dBuilder.parse(fXmlFile);
+
+
+            Node root = doc.getDocumentElement();
+            NodeList nList = root.getChildNodes();
+
+            for (int i = 0; i < nList.getLength(); i++) {
+
+                Node node = nList.item(i);
+                if (node.getNodeType() != Node.TEXT_NODE) {
+                    sportsman sportm = new sportsman();
+                    if (node.hasAttributes()) {
+                        sportm.setName(node.getAttributes().getNamedItem("name").getTextContent());
+                        sportm.setGender(node.getAttributes().getNamedItem("gender").getTextContent());
+                        sportm.setBirthday(node.getAttributes().getNamedItem("birthday").getTextContent());
+                    }
+                    NodeList nodeList1 = node.getChildNodes();
+                    for (int j = 0; j < nodeList1.getLength(); j++) {
+                        Node node1 = nodeList1.item(j);
+                        if (node1.getNodeType() != Node.TEXT_NODE) {
+                            if (node1.hasAttributes()) {
+                                sportm.setPlace(node1.getAttributes().getNamedItem("place").getTextContent());
+                                sportm.setYear(node1.getAttributes().getNamedItem("year").getTextContent());
+                            }
+                            if (node1.getNodeType() == Node.ELEMENT_NODE) {
+                                Element element = (Element) node1;
+                                sportm.setResult(element.getElementsByTagName("result").item(0).getTextContent());
+                                sportm.setAward(element.getElementsByTagName("award").item(0).getTextContent());
+
+                            }
+                        }
+
+                    }
+                    sportsmans.add(sportm);
+
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        Scanner scanner=new Scanner(System.in);
+        sportsman sp=new sportsman();
+        System.out.println("Award:");
+        sp.setAward(scanner.next());
+        System.out.println("Birthday:");
+        sp.setBirthday(scanner.next());
+        System.out.println("Name:");
+        sp.setName(scanner.next());
+        System.out.println("Place:");
+        sp.setPlace(scanner.next());
+        System.out.println("Result:");
+        sp.setResult(scanner.next());
+        System.out.println("Gender:");
+        sp.setGender(scanner.next());
+        System.out.println("Year:");
+        sp.setYear(scanner.next());
+        sportsmans.add(sp);
+        for (sportsman sm : sportsmans) {
+
+            if (sm.getGender().equals("м")) {
+                System.out.println("Имя: " + sm.getName() + " Дата рождения: " + sm.getBirthday());
+            } else {
+                if (Integer.valueOf(sm.getBirthday().substring(0, 4)) < 1985) {
+                    System.out.println("Имя: " + sm.getName() + " Дата рождения: " + sm.getBirthday()
+                            + " Количество медалей: " + sm.getAward());
+                }
+            }
+            if (Integer.valueOf(sm.getBirthday().substring(0, 4)) == 2002) {
+                System.out.println("Имя: " + sm.getName() + " Дата рождения: " + sm.getBirthday() + "Результаты : "
+                        + sm.getResult());
+            }
+        }
+
+
+    }
+
+}
