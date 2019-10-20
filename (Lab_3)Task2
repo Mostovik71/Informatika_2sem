@@ -91,7 +91,7 @@ public class task2 {
             } else {
                 if (Integer.valueOf(sm.getBirthday().substring(0, 4)) < 1985) {
                     System.out.println("Имя: " + sm.getName() + " Дата рождения: " + sm.getBirthday()
-                            + " Количество медалей: " + sm.getAward());
+                            + " Медаль: " + sm.getAward());
                 }
             }
             if (Integer.valueOf(sm.getBirthday().substring(0, 4)) == 2002) {
