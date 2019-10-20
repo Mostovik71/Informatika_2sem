@@ -24,10 +24,10 @@ public class task2 {
     public static void competition() {
         ArrayList<sportsman> sportsmans = new ArrayList<>();
         try {
-            File fXmlFile = new File("sportsmans.xml");
+            File XmlFile = new File("sportsmans.xml");
             DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
-            Document doc = dBuilder.parse(fXmlFile);
+            Document doc = dBuilder.parse(XmlFile);
 
 
             Node root = doc.getDocumentElement();
