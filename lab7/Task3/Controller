@@ -1,0 +1,39 @@
+package sample;
+
+import javafx.application.Platform;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.fxml.FXML;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
+
+public class Controller {
+    @FXML
+    TextArea textarea;
+    @FXML
+    ComboBox<String> kto;
+    ObservableList<String> combo1 = FXCollections.observableArrayList("Кузнечик","Вася","Крокодил","Орел","Трактор","Боинг 747","Слоник");
+    @FXML
+    ComboBox<String> idet ;
+    ObservableList<String> combo2 = FXCollections.observableArrayList(" ушел"," полетел"," побежал"," залез"," уполз"," упрыгал"," умчался");
+    @FXML
+    ComboBox<String> kuda ;
+    ObservableList<String> combo3 = FXCollections.observableArrayList(" в кусты"," на дискотеку"," домой"," за пивом"," на Чукотку"," по грибы"," на охоту");
+
+
+   public void initialize(){
+        kto.setItems(combo1);
+        idet.setItems(combo2);
+        kuda.setItems(combo3);
+   }
+
+
+   public void addPhrase(){
+        textarea.appendText(kto.getValue()+idet.getValue()+kuda.getValue()+"\n");
+    }
+
+   public void close(){
+        Platform.exit();
+    }
+}
