@@ -1,0 +1,92 @@
+package sample;
+import javafx.event.ActionEvent;
+import javafx.scene.control.Tab;
+import javafx.scene.control.TabPane;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
+
+
+import javafx.fxml.FXML;
+import javafx.scene.Group;
+import javafx.scene.Scene;
+import javafx.scene.canvas.Canvas;
+import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.ArcType;
+import javafx.scene.shape.Line;
+import javafx.stage.Stage;
+
+
+import java.util.Scanner;
+
+public class Controller {
+    @FXML
+    private Canvas canvas;
+    @FXML
+    private Canvas canvas1;
+    @FXML
+    private Canvas canvas2;
+    @FXML
+    private Canvas canvas3;
+
+    @FXML
+    private TabPane tab;
+
+    @FXML
+    private TextField y1;
+
+    @FXML
+    private TextField x1;
+
+    @FXML
+    private TextField y2;
+
+    @FXML
+    private TextField x2;
+    @FXML
+    private TextField x;
+
+    @FXML
+    private TextField y;
+
+    @FXML
+    private TextField dl;
+
+    @FXML
+    private TextField sh;
+
+    @FXML
+    private AnchorPane pane;
+    @FXML
+    private AnchorPane pane1;
+
+    @FXML
+    public void lineDraw(ActionEvent actionEvent) {
+        GraphicsContext gc = canvas.getGraphicsContext2D();
+
+        gc.setStroke(Color.DARKGREEN);
+
+        double A = Double.parseDouble(x1.getText());
+        double B = Double.parseDouble(y1.getText());
+        double C = Double.parseDouble(x2.getText());
+        double D = Double.parseDouble(y2.getText());
+        gc.strokeLine(A, B, C, D);
+    }
+
+    public void RectDraw(ActionEvent actionEvent) {
+
+
+        GraphicsContext gc = canvas1.getGraphicsContext2D();
+
+        gc.setStroke(Color.DARKGREEN);
+
+        double A1 = Double.parseDouble(x.getText());
+        double B1 = Double.parseDouble(y.getText());
+        double C1 = Double.parseDouble(dl.getText());
+        double D1 = Double.parseDouble(sh.getText());
+        gc.strokeRect(A1, B1, C1, D1);
+
+
+    }
+}
+
