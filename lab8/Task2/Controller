@@ -21,47 +21,63 @@ import java.util.Scanner;
 
 public class Controller {
     @FXML
-    private Canvas canvas;
+    private Canvas canvas; //прямая
     @FXML
-    private Canvas canvas1;
+    private Canvas canvas1;//прямоугольник
     @FXML
-    private Canvas canvas2;
+    private Canvas canvas2;//эллипс
     @FXML
-    private Canvas canvas3;
+    private Canvas canvas3;//треугольник
 
     @FXML
     private TabPane tab;
 
     @FXML
-    private TextField y1;
+    private TextField y1;//координата х1 прямой
 
     @FXML
-    private TextField x1;
+    private TextField x1;//координата у1 прямой
 
     @FXML
-    private TextField y2;
+    private TextField y2;//координата х2 прямой
 
     @FXML
-    private TextField x2;
+    private TextField x2;//координата у2 прямой
     @FXML
-    private TextField x;
+    private TextField x;//координата х1 верхего угла прямоугольника
 
     @FXML
-    private TextField y;
+    private TextField y;//координата у1 верхего угла прямоугольника
 
     @FXML
-    private TextField dl;
+    private TextField dl;//длина прямоугольника
 
     @FXML
-    private TextField sh;
+    private TextField sh;// ширина прямоугольника
+    @FXML
+    private TextField xel;//координата х1 эллипса
+    @FXML
+    private TextField yel;//координата у1 эллипса
+    @FXML
+    private TextField dlel;// длина эллипса
+    @FXML
+    private TextField shel;// ширина эллипса
+    @FXML
+    private TextField kor11;//координата х1 треугольника
+    @FXML
+    private TextField kor12;//координата у1 треугольника
+    @FXML
+    private TextField kor21;//координата х2 треугольника
+    @FXML
+    private TextField kor22;//координата у2 треугольника
+    @FXML
+    private TextField kor31;//координата х3 треугольника
+    @FXML
+    private TextField kor32;//координата у1 треугольника
+
 
     @FXML
-    private AnchorPane pane;
-    @FXML
-    private AnchorPane pane1;
-
-    @FXML
-    public void lineDraw(ActionEvent actionEvent) {
+    public void lineDraw(ActionEvent actionEvent) { // прямая
         GraphicsContext gc = canvas.getGraphicsContext2D();
 
         gc.setStroke(Color.DARKGREEN);
@@ -73,7 +89,7 @@ public class Controller {
         gc.strokeLine(A, B, C, D);
     }
 
-    public void RectDraw(ActionEvent actionEvent) {
+    public void RectDraw(ActionEvent actionEvent) { // прямоугольник
 
 
         GraphicsContext gc = canvas1.getGraphicsContext2D();
@@ -89,7 +105,7 @@ public class Controller {
 
     }
 
-    public void RectFillDraw(ActionEvent actionEvent) {
+    public void RectFillDraw(ActionEvent actionEvent) { // закрашенный прямоугольник
 
 
         GraphicsContext gc = canvas1.getGraphicsContext2D();
@@ -103,8 +119,75 @@ public class Controller {
         gc.fillRect(A2, B2, C2, D2);
 
     }
-}
 
+    public void ElStrokeDraw(ActionEvent actionEvent) { // эллипс
+
+
+        GraphicsContext gc = canvas2.getGraphicsContext2D();
+
+        gc.setStroke(Color.BLACK);
+
+        double A3 = Double.parseDouble(xel.getText());
+        double B3 = Double.parseDouble(yel.getText());
+        double C3 = Double.parseDouble(dlel.getText());
+        double D3 = Double.parseDouble(shel.getText());
+        gc.strokeOval(A3, B3, C3, D3);
+
+    }
+
+    public void ElFillDraw(ActionEvent actionEvent) { //закрашенный эллипс
+
+
+        GraphicsContext gc = canvas2.getGraphicsContext2D();
+
+        gc.setFill(Color.BLACK);
+
+        double A4 = Double.parseDouble(xel.getText());
+        double B4 = Double.parseDouble(yel.getText());
+        double C4 = Double.parseDouble(dlel.getText());
+        double D4 = Double.parseDouble(shel.getText());
+        gc.fillOval(A4, B4, C4, D4);
+    }
+
+    public void TrStrokeDraw(ActionEvent actionEvent) { // треугольник
+
+
+        GraphicsContext gc = canvas3.getGraphicsContext2D();
+
+        gc.setStroke(Color.BLACK);
+double[] mas1 = new double[3], mas2= new double[3];
+        mas1[0] = Double.parseDouble(kor11.getText());
+        mas2[0] = Double.parseDouble(kor21.getText());
+        mas1[1] = Double.parseDouble(kor31.getText());
+        mas2[1] = Double.parseDouble(kor12.getText());
+
+        mas1[2] = Double.parseDouble(kor22.getText());
+
+        mas2[2] = Double.parseDouble(kor32.getText());
+        gc.strokePolygon( mas1,mas2,3);
+
+    }
+
+    public void TrFillDraw(ActionEvent actionEvent) { // закрашенный треугольник
+
+
+        GraphicsContext gc = canvas3.getGraphicsContext2D();
+
+        gc.setFill(Color.RED);
+
+
+        double[] mas1 = new double[3], mas2= new double[3];
+        mas1[0] = Double.parseDouble(kor11.getText());
+        mas2[0] = Double.parseDouble(kor21.getText());
+        mas1[1] = Double.parseDouble(kor31.getText());
+        mas2[1] = Double.parseDouble(kor12.getText());
+
+        mas1[2] = Double.parseDouble(kor22.getText());
+
+        mas2[2] = Double.parseDouble(kor32.getText());
+        gc.fillPolygon( mas1,mas2,3);
+    }
+}
 
 
 
