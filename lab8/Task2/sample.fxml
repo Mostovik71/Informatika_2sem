@@ -27,25 +27,27 @@
                   <TextField fx:id="y1" layoutX="522.0" layoutY="134.0" prefHeight="25.0" prefWidth="50.0" />
                   <TextField layoutX="522.0" layoutY="216.0" prefHeight="25.0" prefWidth="50.0" fx:id="x2" />
                   <TextField fx:id="y2" layoutX="522.0" layoutY="258.0" prefHeight="25.0" prefWidth="50.0" />
-                  <Button layoutX="510.0" layoutY="320.0" mnemonicParsing="false" onAction="#lineDraw" text="Рисовать" />
+                  <Button layoutX="506.0" layoutY="332.0" mnemonicParsing="false" onAction="#lineDraw" prefHeight="25.0" prefWidth="74.0" text="Рисовать" />
+                
                </children></AnchorPane>
       </content>
     </Tab>
     <Tab text="Прямоугольник">
       <content>
-        <AnchorPane fx:id="pane1" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>
                   <Button layoutX="522.0" layoutY="332.0" mnemonicParsing="false" onAction="#RectDraw" text="Рисовать" />
                   <Canvas fx:id="canvas1" height="235.0" width="326.0" />
-                  <TextField layoutX="505.0" layoutY="82.0" prefHeight="25.0" prefWidth="34.0" fx:id="x" />
-                  <Label layoutX="502.0" layoutY="29.0" text="Верхний угол" />
-                  <Label layoutX="505.0" layoutY="58.0" text="X" />
-                  <Label layoutX="506.0" layoutY="118.0" text="Y" />
-                  <TextField fx:id="y" layoutX="505.0" layoutY="147.0" prefHeight="25.0" prefWidth="34.0" />
-                  <Label layoutX="505.0" layoutY="186.0" text="Длина" />
-                  <TextField fx:id="dl" layoutX="506.0" layoutY="210.0" prefHeight="25.0" prefWidth="34.0" />
-                  <Label layoutX="506.0" layoutY="246.0" text="Ширина" />
-                  <TextField fx:id="sh" layoutX="506.0" layoutY="277.0" prefHeight="25.0" prefWidth="34.0" />
+                  <TextField layoutX="512.0" layoutY="62.0" prefHeight="25.0" prefWidth="34.0" fx:id="x" />
+                  <Label layoutX="515.0" layoutY="6.0" text="Верхний угол" />
+                  <Label layoutX="518.0" layoutY="37.0" text="X" />
+                  <Label layoutX="519.0" layoutY="101.0" text="Y" />
+                  <TextField fx:id="y" layoutX="512.0" layoutY="125.0" prefHeight="25.0" prefWidth="34.0" />
+                  <Label layoutX="512.0" layoutY="169.0" text="Длина" />
+                  <TextField fx:id="dl" layoutX="512.0" layoutY="200.0" prefHeight="25.0" prefWidth="34.0" />
+                  <Label layoutX="507.0" layoutY="235.0" text="Ширина" />
+                  <TextField fx:id="sh" layoutX="513.0" layoutY="259.0" prefHeight="25.0" prefWidth="34.0" />
+                  <Button layoutX="522.0" layoutY="300.0" mnemonicParsing="false" onAction="#RectFillDraw" text="Закрасить" />
                </children></AnchorPane>
       </content>
     </Tab>
