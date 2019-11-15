@@ -88,5 +88,23 @@ public class Controller {
 
 
     }
+
+    public void RectFillDraw(ActionEvent actionEvent) {
+
+
+        GraphicsContext gc = canvas1.getGraphicsContext2D();
+
+        gc.setFill(Color.DARKGREEN);
+
+        double A2 = Double.parseDouble(x.getText());
+        double B2 = Double.parseDouble(y.getText());
+        double C2 = Double.parseDouble(dl.getText());
+        double D2 = Double.parseDouble(sh.getText());
+        gc.fillRect(A2, B2, C2, D2);
+
+    }
 }
+
+
+
 
