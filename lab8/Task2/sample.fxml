@@ -74,23 +74,24 @@
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                     <children>
                         <Canvas fx:id="canvas3" height="200.0" width="200.0" />
-                  <Button layoutX="14.0" layoutY="309.0" mnemonicParsing="false" text="Рисовать" />
-                  <Button layoutX="100.0" layoutY="309.0" mnemonicParsing="false" text="Рисовать закрашенный" />
+                  <Button layoutX="14.0" layoutY="309.0" mnemonicParsing="false" onAction="#TrStrokeDraw" text="Рисовать" />
+                  <Button layoutX="100.0" layoutY="309.0" mnemonicParsing="false" onAction="#TrFillDraw" text="Рисовать закрашенный" />
                   <Label layoutX="426.0" layoutY="26.0" text="X1" />
                   <Label layoutX="525.0" layoutY="26.0" text="Y1" />
-                  <TextField layoutX="409.0" layoutY="50.0" prefHeight="25.0" prefWidth="48.0" />
-                  <TextField layoutX="508.0" layoutY="50.0" prefHeight="25.0" prefWidth="48.0" />
+                  <TextField fx:id="kor11" layoutX="409.0" layoutY="50.0" prefHeight="25.0"  prefWidth="48.0" />
+                  <TextField fx:id="kor12" layoutX="508.0" layoutY="50.0" prefHeight="25.0" prefWidth="48.0" />
                   <Label layoutX="426.0" layoutY="114.0" text="X2" />
                   <Label layoutX="525.0" layoutY="114.0" text="Y2" />
-                  <TextField layoutX="508.0" layoutY="143.0" prefHeight="25.0" prefWidth="48.0" />
-                  <TextField layoutX="409.0" layoutY="143.0" prefHeight="25.0" prefWidth="48.0" />
+                  <TextField fx:id="kor21" layoutX="508.0" layoutY="143.0" prefHeight="25.0" prefWidth="48.0" />
+                  <TextField fx:id="kor22" layoutX="409.0" layoutY="143.0" prefHeight="25.0" prefWidth="48.0" />
                   <Label layoutX="426.0" layoutY="200.0" text="Y3" />
                   <Label layoutX="525.0" layoutY="200.0" text="Y3" />
-                  <TextField layoutX="409.0" layoutY="244.0" prefHeight="25.0" prefWidth="48.0" />
-                  <TextField layoutX="508.0" layoutY="244.0" prefHeight="25.0" prefWidth="48.0" />
+                  <TextField fx:id="kor31" layoutX="409.0" layoutY="244.0" prefHeight="25.0" prefWidth="48.0" />
+                  <TextField fx:id="kor32" layoutX="508.0" layoutY="244.0" prefHeight="25.0" prefWidth="48.0" />
                     </children>
                 </AnchorPane>
             </content>
         </Tab>
     </tabs>
 </TabPane>
+
