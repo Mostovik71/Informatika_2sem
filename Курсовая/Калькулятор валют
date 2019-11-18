@@ -1,0 +1,24 @@
+import javax.swing.*;
+import javax.swing.JDialog;
+import javax.swing.JOptionPane;
+
+public class CalculatorValut {
+
+
+
+        public static void main(String[] args) {
+
+            String[] selectionValues = {"$", "€", "Руб"};
+            String initialSelectionValue = null;
+            String userCurrency = (String) JOptionPane.showInputDialog(null, "Какая валюта вам нужна?",
+                    "Обмен валют", JOptionPane.INFORMATION_MESSAGE, null, selectionValues, initialSelectionValue);
+            String userData = (String) JOptionPane.showInputDialog(null, "Какую валюту предложите?",
+                    "Обмен валют", JOptionPane.INFORMATION_MESSAGE, null, selectionValues, initialSelectionValue);
+            double course = Double.parseDouble(JOptionPane.showInputDialog("Какой курс " + userData + " относительно " + userCurrency + " ?" + "\n" + "1" + userData + " ="));
+            double result = Double.parseDouble(JOptionPane.showInputDialog("Сколько " + userData + " вы собираетесь обменять?"));
+            JOptionPane.showMessageDialog(null, "При конвертации " + result + userData + " в " + userCurrency + " вы получите " + (course * result) + userCurrency);
+
+        }
+
+
+}
