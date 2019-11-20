@@ -34,8 +34,8 @@ public class Controller {
             BufferedReader reader = new BufferedReader(fr);
 
             String line = reader.readLine();
-            LineChart.Series1<Double, Double> series = new LineChart.Series<>();
-            series1.setName("Апрель");
+            LineChart.Series<Double, Double> series = new LineChart.Series<>();
+            series.setName("Апрель");
             while (line != null) {
                 double x = Double.parseDouble(line.substring(0, 2));
                 double y = Double.parseDouble(line.substring(11));
@@ -46,7 +46,7 @@ public class Controller {
                 }
                 line = reader.readLine();
             }
-            lineChartData.add(series1);
+            lineChartData.add(series);
             lineChart.setData(lineChartData);
         } catch (IOException e) {
             e.printStackTrace();
