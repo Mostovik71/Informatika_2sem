@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.chart.LineChart?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="1501.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
+    <children>
+        <LineChart fx:id="lineChart" layoutX="7.0" layoutY="23.0" prefHeight="253.0" prefWidth="1273.0">
+            <xAxis>
+                <NumberAxis fx:id="X" side="BOTTOM" />
+            </xAxis>
+            <yAxis>
+                <NumberAxis fx:id="Y" side="LEFT" />
+            </yAxis>
+        </LineChart>
+        <Button layoutX="14.0" layoutY="316.0" mnemonicParsing="false" onAction="#december" prefHeight="25.0" prefWidth="69.0" text="Декабрь" />
+      <Button layoutX="96.0" layoutY="316.0" mnemonicParsing="false" onAction="#january" prefHeight="25.0" prefWidth="69.0" text="Январь" />
+      <Button layoutX="180.0" layoutY="316.0" mnemonicParsing="false" onAction="#february" prefHeight="25.0" prefWidth="69.0" text="Февраль" />
+      <Button layoutX="14.0" layoutY="361.0" mnemonicParsing="false" onAction="#march" prefHeight="25.0" prefWidth="69.0" text="Март" />
+      <Button layoutX="96.0" layoutY="361.0" mnemonicParsing="false" onAction="#april" prefHeight="25.0" prefWidth="69.0" text="Апрель" />
+      <Button layoutX="180.0" layoutY="361.0" mnemonicParsing="false" onAction="#may" prefHeight="25.0" prefWidth="69.0" text="Май" />
+      <Button layoutX="325.0" layoutY="316.0" mnemonicParsing="false" onAction="#june" prefHeight="25.0" prefWidth="69.0" text="Июнь" />
+      <Button layoutX="325.0" layoutY="361.0" mnemonicParsing="false" onAction="#september" prefHeight="25.0" prefWidth="69.0" text="Сентябрь" />
+      <Button layoutX="411.0" layoutY="316.0" mnemonicParsing="false" onAction="#july" prefHeight="25.0" prefWidth="69.0" text="Июль" />
+      <Button layoutX="411.0" layoutY="361.0" mnemonicParsing="false" onAction="#october" prefHeight="25.0" prefWidth="69.0" text="Октябрь" />
+      <Button layoutX="499.0" layoutY="316.0" mnemonicParsing="false" onAction="#august" prefHeight="25.0" prefWidth="69.0" text="Август" />
+      <Button layoutX="499.0" layoutY="361.0" mnemonicParsing="false" onAction="#november" prefHeight="25.0" prefWidth="69.0" text="Ноябрь" />
+    </children>
+</AnchorPane>
