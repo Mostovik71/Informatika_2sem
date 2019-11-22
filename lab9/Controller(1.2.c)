@@ -13,7 +13,7 @@ import java.io.IOException;
 
 public class Controller {
 
-    ObservableList<XYChart.Series<String, Double>> barChartData=FXCollections.observableArrayList();
+
     @FXML
     BarChart<String, Double> barChart;
     @FXML
@@ -34,23 +34,26 @@ CategoryAxis X;
 
             XYChart.Series<String, Double> series = new XYChart.Series<String, Double>();
 
-            int sum = 0; int days=31;int av=0;
+            int sum = 0; int days=31;double av=0;
+            double y=0; String x="Май";
             while (line != null) {
                 if (line.substring(4, 5).equals("5")) {
-                    String x="Апрель";
-                    double y = Double.parseDouble(line.substring(11));
+
+                     y = Double.parseDouble(line.substring(11));
                       sum+=y;
-                    series.getData().add(new XYChart.Data<>(x,y));
+
 
                 }
-                av=sum/days;
 
+                av=(double )sum/days;
                 line = reader.readLine();
 
+
             }
+            series.getData().add(new XYChart.Data<>(x,av));
             System.out.println(av);
-            barChartData.add(series);
-            barChart.setData(barChartData);
+            barChart.getData().add(series);
+
         } catch (IOException e) {
             e.printStackTrace();
 
