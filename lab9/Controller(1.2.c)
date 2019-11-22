@@ -17,48 +17,312 @@ public class Controller {
     @FXML
     BarChart<String, Double> barChart;
     @FXML
-CategoryAxis X;
+    CategoryAxis X;
     @FXML
     NumberAxis Y;
 
     @FXML
-    public void file() {
+    public void december() {
         try {
-            File file = new File("C:\\Users\\VAMostovik\\Desktop\\temp2.csv");
-
+            File file = new File("C:\\Users\\mosto\\Desktop\\temp2.csv");
             FileReader fr = new FileReader(file);
-
             BufferedReader reader = new BufferedReader(fr);
-
             String line = reader.readLine();
-
             XYChart.Series<String, Double> series = new XYChart.Series<String, Double>();
-
-            int sum = 0; int days=31;double av=0;
-            double y=0; String x="Май";
+            series.setName("Декабрь");
+            int sum = 0;
+            int days = 31;
+            double av = 0;
+            double y = 0;
+            String x = "Декабрь";
             while (line != null) {
-                if (line.substring(4, 5).equals("5")) {
-
-                     y = Double.parseDouble(line.substring(11));
-                      sum+=y;
-
-
+                if (line.substring(3, 5).equals("12")) {
+                    y = Double.parseDouble(line.substring(11));
+                    sum += y;
                 }
-
-                av=(double )sum/days;
+                av = (double) sum / days;
                 line = reader.readLine();
-
-
             }
-            series.getData().add(new XYChart.Data<>(x,av));
-            System.out.println(av);
+            series.getData().add(new XYChart.Data<>(x, av));
             barChart.getData().add(series);
-
         } catch (IOException e) {
             e.printStackTrace();
 
         }
-
-
+    }
+        @FXML
+    public void january() {
+        try {
+            File file = new File("C:\\Users\\mosto\\Desktop\\temp2.csv");
+            FileReader fr = new FileReader(file);
+            BufferedReader reader = new BufferedReader(fr);
+            String line = reader.readLine();
+            XYChart.Series<String, Double> series = new XYChart.Series<String, Double>();
+            series.setName("Январь");
+            int sum = 0; int days=31;double av=0;
+            double y=0; String x="Январь";
+            while (line != null) {
+                if (line.substring(4, 5).equals("1")) {
+                    y = Double.parseDouble(line.substring(11));
+                    sum+=y;
+                }
+                av=(double )sum/days;
+                line = reader.readLine();
+            }
+            series.getData().add(new XYChart.Data<>(x,av));
+            barChart.getData().add(series);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    @FXML
+    public void february() {
+        try {
+            File file = new File("C:\\Users\\mosto\\Desktop\\temp2.csv");
+            FileReader fr = new FileReader(file);
+            BufferedReader reader = new BufferedReader(fr);
+            String line = reader.readLine();
+            XYChart.Series<String, Double> series = new XYChart.Series<String, Double>();
+            series.setName("Февраль");
+            int sum = 0; int days=28;double av=0;
+            double y=0; String x="Февраль";
+            while (line != null) {
+                if (line.substring(4, 5).equals("2")) {
+                    y = Double.parseDouble(line.substring(11));
+                    sum+=y;
+                }
+                av=(double )sum/days;
+                line = reader.readLine();
+            }
+            series.getData().add(new XYChart.Data<>(x,av));
+            barChart.getData().add(series);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    @FXML
+    public void march() {
+        try {
+            File file = new File("C:\\Users\\mosto\\Desktop\\temp2.csv");
+            FileReader fr = new FileReader(file);
+            BufferedReader reader = new BufferedReader(fr);
+            String line = reader.readLine();
+            XYChart.Series<String, Double> series = new XYChart.Series<String, Double>();
+            series.setName("Март");
+            int sum = 0; int days=31;double av=0;
+            double y=0; String x="Март";
+            while (line != null) {
+                if (line.substring(4, 5).equals("3")) {
+                    y = Double.parseDouble(line.substring(11));
+                    sum+=y;
+                }
+                av=(double )sum/days;
+                line = reader.readLine();
+            }
+            series.getData().add(new XYChart.Data<>(x,av));
+            barChart.getData().add(series);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    @FXML
+    public void april() {
+        try {
+            File file = new File("C:\\Users\\mosto\\Desktop\\temp2.csv");
+            FileReader fr = new FileReader(file);
+            BufferedReader reader = new BufferedReader(fr);
+            String line = reader.readLine();
+            XYChart.Series<String, Double> series = new XYChart.Series<String, Double>();
+            series.setName("Апрель");
+            int sum = 0; int days=30;double av=0;
+            double y=0; String x="Апрель";
+            while (line != null) {
+                if (line.substring(4, 5).equals("2")) {
+                    y = Double.parseDouble(line.substring(11));
+                    sum+=y;
+                }
+                av=(double )sum/days;
+                line = reader.readLine();
+            }
+            series.getData().add(new XYChart.Data<>(x,av));
+            barChart.getData().add(series);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    @FXML
+    public void may() {
+        try {
+            File file = new File("C:\\Users\\mosto\\Desktop\\temp2.csv");
+            FileReader fr = new FileReader(file);
+            BufferedReader reader = new BufferedReader(fr);
+            String line = reader.readLine();
+            XYChart.Series<String, Double> series = new XYChart.Series<String, Double>();
+            series.setName("Май");
+            int sum = 0; int days=31;double av=0;
+            double y=0; String x="Май";
+            while (line != null) {
+                if (line.substring(4, 5).equals("5")) {
+                    y = Double.parseDouble(line.substring(11));
+                    sum+=y;
+                }
+                av=(double )sum/days;
+                line = reader.readLine();
+            }
+            series.getData().add(new XYChart.Data<>(x,av));
+            barChart.getData().add(series);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    @FXML
+    public void june() {
+        try {
+            File file = new File("C:\\Users\\mosto\\Desktop\\temp2.csv");
+            FileReader fr = new FileReader(file);
+            BufferedReader reader = new BufferedReader(fr);
+            String line = reader.readLine();
+            XYChart.Series<String, Double> series = new XYChart.Series<String, Double>();
+            series.setName("Июнь");
+            int sum = 0; int days=30;double av=0;
+            double y=0; String x="Июнь";
+            while (line != null) {
+                if (line.substring(4, 5).equals("6")) {
+                    y = Double.parseDouble(line.substring(11));
+                    sum+=y;
+                }
+                av=(double )sum/days;
+                line = reader.readLine();
+            }
+            series.getData().add(new XYChart.Data<>(x,av));
+            barChart.getData().add(series);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    @FXML
+    public void july() {
+        try {
+            File file = new File("C:\\Users\\mosto\\Desktop\\temp2.csv");
+            FileReader fr = new FileReader(file);
+            BufferedReader reader = new BufferedReader(fr);
+            String line = reader.readLine();
+            XYChart.Series<String, Double> series = new XYChart.Series<String, Double>();
+            series.setName("Июль");
+            int sum = 0; int days=31;double av=0;
+            double y=0; String x="Июль";
+            while (line != null) {
+                if (line.substring(4, 5).equals("7")) {
+                    y = Double.parseDouble(line.substring(11));
+                    sum+=y;
+                }
+                av=(double )sum/days;
+                line = reader.readLine();
+            }
+            series.getData().add(new XYChart.Data<>(x,av));
+            barChart.getData().add(series);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    @FXML
+    public void august() {
+        try {
+            File file = new File("C:\\Users\\mosto\\Desktop\\temp2.csv");
+            FileReader fr = new FileReader(file);
+            BufferedReader reader = new BufferedReader(fr);
+            String line = reader.readLine();
+            XYChart.Series<String, Double> series = new XYChart.Series<String, Double>();
+            series.setName("Август");
+            int sum = 0; int days=31;double av=0;
+            double y=0; String x="Август";
+            while (line != null) {
+                if (line.substring(4, 5).equals("8")) {
+                    y = Double.parseDouble(line.substring(11));
+                    sum+=y;
+                }
+                av=(double )sum/days;
+                line = reader.readLine();
+            }
+            series.getData().add(new XYChart.Data<>(x,av));
+            barChart.getData().add(series);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    @FXML
+    public void september() {
+        try {
+            File file = new File("C:\\Users\\mosto\\Desktop\\temp2.csv");
+            FileReader fr = new FileReader(file);
+            BufferedReader reader = new BufferedReader(fr);
+            String line = reader.readLine();
+            XYChart.Series<String, Double> series = new XYChart.Series<String, Double>();
+            series.setName("Сентябрь");
+            int sum = 0; int days=30;double av=0;
+            double y=0; String x="Сентябрь";
+            while (line != null) {
+                if (line.substring(4, 5).equals("9")) {
+                    y = Double.parseDouble(line.substring(11));
+                    sum+=y;
+                }
+                av=(double )sum/days;
+                line = reader.readLine();
+            }
+            series.getData().add(new XYChart.Data<>(x,av));
+            barChart.getData().add(series);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    @FXML
+    public void october() {
+        try {
+            File file = new File("C:\\Users\\mosto\\Desktop\\temp2.csv");
+            FileReader fr = new FileReader(file);
+            BufferedReader reader = new BufferedReader(fr);
+            String line = reader.readLine();
+            XYChart.Series<String, Double> series = new XYChart.Series<String, Double>();
+            series.setName("Октябрь");
+            int sum = 0; int days=31;double av=0;
+            double y=0; String x="Октябрь";
+            while (line != null) {
+                if (line.substring(3, 5).equals("10")) {
+                    y = Double.parseDouble(line.substring(11));
+                    sum+=y;
+                }
+                av=(double )sum/days;
+                line = reader.readLine();
+            }
+            series.getData().add(new XYChart.Data<>(x,av));
+            barChart.getData().add(series);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    @FXML
+    public void november() {
+        try {
+            File file = new File("C:\\Users\\mosto\\Desktop\\temp2.csv");
+            FileReader fr = new FileReader(file);
+            BufferedReader reader = new BufferedReader(fr);
+            String line = reader.readLine();
+            XYChart.Series<String, Double> series = new XYChart.Series<String, Double>();
+            series.setName("Ноябрь");
+            int sum = 0; int days=31;double av=0;
+            double y=0; String x="Ноябрь";
+            while (line != null) {
+                if (line.substring(3, 5).equals("11")) {
+                    y = Double.parseDouble(line.substring(11));
+                    sum+=y;
+                }
+                av=(double )sum/days;
+                line = reader.readLine();
+            }
+            series.getData().add(new XYChart.Data<>(x,av));
+            barChart.getData().add(series);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
