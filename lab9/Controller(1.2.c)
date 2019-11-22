@@ -13,9 +13,9 @@ import java.io.IOException;
 
 public class Controller {
 
-    ObservableList<XYChart.Series<Double, Double>> barChartData=FXCollections.observableArrayList();
+    ObservableList<XYChart.Series<String, Double>> barChartData=FXCollections.observableArrayList();
     @FXML
-    BarChart<String, Number> barChart;
+    BarChart<String, Double> barChart;
     @FXML
 CategoryAxis X;
     @FXML
@@ -32,7 +32,7 @@ CategoryAxis X;
 
             String line = reader.readLine();
 
-            XYChart.Series<String, Number> series = new XYChart.Series<String, Number>();
+            XYChart.Series<String, Double> series = new XYChart.Series<String, Double>();
 
             int sum = 0; int days=31;int av=0;
             while (line != null) {
