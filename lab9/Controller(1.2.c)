@@ -1,0 +1,61 @@
+package sample;
+
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.fxml.FXML;
+import javafx.scene.chart.*;
+
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+
+public class Controller {
+
+    ObservableList<XYChart.Series<Double, Double>> barChartData=FXCollections.observableArrayList();
+    @FXML
+    BarChart<String, Number> barChart;
+    @FXML
+CategoryAxis X;
+    @FXML
+    NumberAxis Y;
+
+    @FXML
+    public void file() {
+        try {
+            File file = new File("C:\\Users\\VAMostovik\\Desktop\\temp2.csv");
+
+            FileReader fr = new FileReader(file);
+
+            BufferedReader reader = new BufferedReader(fr);
+
+            String line = reader.readLine();
+
+            XYChart.Series<String, Number> series = new XYChart.Series<String, Number>();
+
+            int sum = 0; int days=31;int av=0;
+            while (line != null) {
+                if (line.substring(4, 5).equals("5")) {
+                    String x="Апрель";
+                    double y = Double.parseDouble(line.substring(11));
+                      sum+=y;
+                    series.getData().add(new XYChart.Data<>(x,y));
+
+                }
+                av=sum/days;
+
+                line = reader.readLine();
+
+            }
+            System.out.println(av);
+            barChartData.add(series);
+            barChart.setData(barChartData);
+        } catch (IOException e) {
+            e.printStackTrace();
+
+        }
+
+
+    }
+}
