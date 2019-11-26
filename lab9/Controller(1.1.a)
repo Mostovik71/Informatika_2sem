@@ -1,0 +1,65 @@
+package sample;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.fxml.FXML;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
+
+
+import javafx.scene.control.TableColumn;
+
+import java.io.*;
+
+public class Controller {
+
+    private ObservableList<Date> Data = FXCollections.observableArrayList();
+
+    @FXML
+    private TableView<Date> table;
+    @FXML
+    private TableColumn<Date, String> dateColumn;
+    @FXML
+    private TableColumn<Date, String> tempColumn;
+
+
+    @FXML
+    private void initialize() throws IOException {
+        initData();
+
+
+        dateColumn.setCellValueFactory(new PropertyValueFactory<Date, String>("date"));
+        tempColumn.setCellValueFactory(new PropertyValueFactory<Date, String>("temp"));
+
+
+        table.setItems(Data);
+    }
+
+    String[] d = new String[365];
+    private void initData() throws IOException {
+        File file = new File("C:\\Users\\mosto\\Desktop\\temp2.csv");
+        FileReader fr = new FileReader(file);
+        BufferedReader reader = new BufferedReader(fr);
+        String line = reader.readLine();
+
+        int i=0;
+        while (line != null ) {
+            String[] fields = line.split(";");
+            d[i] = fields[0];
+            int t = Integer.parseInt(line.substring(11));
+            Data.add (new Date (d[i],t));
+            i++;
+
+
+
+            line = reader.readLine();
+
+
+        }
+
+
+
+        }
+    }
+
+
+
