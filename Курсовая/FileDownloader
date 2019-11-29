@@ -1,0 +1,25 @@
+package packege;
+
+import java.io.*;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLConnection;
+import java.nio.channels.Channels;
+import java.nio.channels.WritableByteChannel;
+import java.nio.file.Files;
+
+public class UrlDemo {
+    public static void main(String[]args ) throws IOException {
+
+        URL website = new URL("https://raw.githubusercontent.com/Mostovik71/Informatika_2sem/master/%D0%9A%D1%83%D1%80%D1%81%D0%BE%D0%B2%D0%B0%D1%8F/temp.txt");
+        URLConnection urlc = website.openConnection();
+        urlc.setDoOutput(true);
+        WritableByteChannel rbc = Channels.newChannel(urlc.getOutputStream());
+
+        FileOutputStream fos;
+        fos = new FileOutputStream("record_file.txt");
+        fos.getChannel().transferTo(0, Long.MAX_VALUE, rbc);
+        fos.close();
+    }
+
+    }
