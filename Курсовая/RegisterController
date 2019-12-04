@@ -1,13 +1,44 @@
 package sample;
 
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+
 
 import java.awt.event.ActionEvent;
 
 public class RegisterController {
+    @FXML
+    private TextField lgfld2;
 
+    @FXML
+    private TextField familia;
+
+    @FXML
+    private TextField name;
+
+    @FXML
+    private PasswordField psswrdfld2;
+
+
+
+
+@FXML
+   void register() {
+        DatabaseHandler dbHandler = new DatabaseHandler();
+        String firstname = name.getText();
+    String lastname = familia.getText();
+    String username = lgfld2.getText();
+    String password = psswrdfld2.getText();
+User user = new User(firstname,lastname,username,password);
+        dbHandler.RegisterUser(user);
     }
+
+
+}
+
 
