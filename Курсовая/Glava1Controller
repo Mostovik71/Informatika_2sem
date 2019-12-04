@@ -1,0 +1,146 @@
+package sample;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.chart.LineChart;
+import javafx.scene.chart.NumberAxis;
+import javafx.scene.chart.XYChart;
+import javafx.scene.canvas.Canvas;
+import javafx.scene.control.CheckBox;
+import javafx.scene.control.ColorPicker;
+import javafx.scene.layout.AnchorPane;
+
+import java.awt.*;
+import java.io.*;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.nio.file.Files;
+
+import javafx.scene.control.TextField;
+import javafx.stage.Stage;
+
+import javax.swing.*;
+public class Glava1Controller {
+    ObservableList<XYChart.Series<Double, Double>> lineChartData=FXCollections.observableArrayList();
+    @FXML
+    LineChart<Double, Double> lineChart;
+    @FXML
+    private TextField brushSize;
+
+    @FXML
+    private ColorPicker colorPicker;
+
+    @FXML
+    private CheckBox eraser;
+    @FXML
+    NumberAxis X;
+    @FXML
+    NumberAxis Y;
+    @FXML
+    AnchorPane pane;
+    @FXML
+    private Canvas canvas;
+    @FXML
+    public void file() {
+        try {
+            File file = new File("C:\\Users\\mosto\\Desktop\\Temp.csv");
+
+            FileReader fr = new FileReader(file);
+
+            BufferedReader reader = new BufferedReader(fr);
+
+            String line = reader.readLine();
+            LineChart.Series<Double, Double> series = new LineChart.Series<>();
+            series.setName("Январь");
+            while (line != null) {
+                double x = Double.parseDouble(line.substring(0, 2));
+                double y = Double.parseDouble(line.substring(11));
+
+                System.out.println(x + " " + y);
+
+                series.getData().add(new XYChart.Data<>(x, y));
+
+                line = reader.readLine();
+            }
+            lineChartData.add(series);
+            lineChart.setData(lineChartData);
+        } catch (IOException e) {
+            e.printStackTrace();
+
+        }
+
+
+
+    }
+    @FXML
+    private void fileDownload(){
+        try {
+            URL url = new URL("https://raw.githubusercontent.com/Mostovik71/Informatika_2sem/master/temp.csv");
+            InputStream inputStream = url.openStream();
+            File file=new File("C:\\Users\\mosto\\Desktop\\text.txt");
+            if(!file.exists()) {
+                Files.copy(inputStream, new File("C:\\Users\\mosto\\Desktop\\text.txt").toPath());
+            }else{
+                System.out.println("Файл уже существует");
+            }
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    @FXML
+    void calculator(){
+        String[] selectionValues = {"$", "€", "Руб"};
+        String initialSelectionValue = null;
+        String userCurrency = (String) JOptionPane.showInputDialog(null, "Какая валюта вам нужна?",
+                "Обмен валют", JOptionPane.INFORMATION_MESSAGE, null, selectionValues, initialSelectionValue);
+        String userData = (String) JOptionPane.showInputDialog(null, "Какую валюту предложите?",
+                "Обмен валют", JOptionPane.INFORMATION_MESSAGE, null, selectionValues, initialSelectionValue);
+        double course = Double.parseDouble(JOptionPane.showInputDialog("Какой курс " + userData + " относительно " + userCurrency + " ?" + "\n" + "1" + userData + " ="));
+        double result = Double.parseDouble(JOptionPane.showInputDialog("Сколько " + userData + " вы собираетесь обменять?"));
+        JOptionPane.showMessageDialog(null, "При конвертации " + result + userData + " в " + userCurrency + " вы получите " + (course * result) + userCurrency);
+    }
+
+
+    public void draw(){
+        GraphicsContext gc=canvas.getGraphicsContext2D();
+        canvas.setOnMouseDragged(e->
+        {
+            double size = Double.parseDouble(brushSize.getText());
+            double x = e.getX() - size/2;
+            double y = e.getY() - size/2;
+
+            if (eraser.isSelected()){
+                gc.clearRect(x,y,size,size);
+            }
+            else{
+                gc.setFill(colorPicker.getValue());
+                gc.fillRect(x,y,size,size);
+            }
+
+        });
+
+    }
+    @FXML
+    void reg(ActionEvent actionEvent) {
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("/sample/Graphic.fxml"));
+
+        try {
+            loader.load();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        Parent root = loader.getRoot();
+        Stage stage = new Stage();
+        stage.setScene(new Scene(root));
+        stage.show();
+    }
+}
+
