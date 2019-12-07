@@ -54,12 +54,17 @@ public class Glava1Controller {
 
     @FXML
     private CheckBox eraser;
+
+
+
     @FXML
     NumberAxis X;
     @FXML
     NumberAxis Y;
     @FXML
     AnchorPane pane;
+    @FXML
+   AnchorPane pane1;
     @FXML
     private Canvas canvas;
     LineChart.Series<Double, Double> series = new LineChart.Series<>();
@@ -112,23 +117,7 @@ public class Glava1Controller {
 
 
 
-    @FXML
-    private void fileDownload(){
-        try {
-            URL url = new URL("https://raw.githubusercontent.com/Mostovik71/Informatika_2sem/master/temp.csv");
-            InputStream inputStream = url.openStream();
-            File file=new File("C:\\Users\\mosto\\Desktop\\text.txt");
-            if(!file.exists()) {
-                Files.copy(inputStream, new File("C:\\Users\\mosto\\Desktop\\text.txt").toPath());
-            }else{
-                System.out.println("Файл уже существует");
-            }
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
+
     @FXML
     void calculator(){
         String[] selectionValues = {"$", "€", "Руб"};
@@ -162,6 +151,25 @@ public class Glava1Controller {
         });
 
     }
+
+
+
+    @FXML
+    void dbopen(ActionEvent actionEvent) {
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("/sample/Database.fxml"));
+
+        try {
+            loader.load();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        Parent root = loader.getRoot();
+        Stage stage = new Stage();
+        stage.setScene(new Scene(root));
+        stage.show();
+    }
+
     @FXML
     void reg(ActionEvent actionEvent) {
         FXMLLoader loader = new FXMLLoader();
