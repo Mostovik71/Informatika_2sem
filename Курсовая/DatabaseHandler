@@ -1,33 +1,41 @@
 package sample;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
-import java.sql.ResultSet;
+import javafx.fxml.FXML;
+
+import java.io.*;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.nio.file.Files;
+import java.sql.*;
+
 public class DatabaseHandler extends Configs {
     Connection dbConnection;
+    @FXML
+public void initialize() throws SQLException, ClassNotFoundException {
+    getDbConnection();
+}
 
-    public Connection getDbConnection()
-            throws ClassNotFoundException, SQLException {
+    public void getDbConnection() throws ClassNotFoundException, SQLException {
 
-        String connectionString = "jdbc:mysql://" + dbHost + ":" + dbPort + "/" + dbName + "?verifyServerCertificate=false" +
-                "&useSSL=false" +
-                "&requireSSL=false" +
-                "&useLegacyDatetimeCode=false" +
-                "&amp" +
-                "&serverTimezone=UTC";
-        Class.forName("com.mysql.cj.jdbc.Driver");
+            String connectionString = "jdbc:mysql://" + dbHost + ":" + dbPort + "/" + dbName + "?verifyServerCertificate=false" +
+                    "&useSSL=false" +
+                    "&requireSSL=false" +
+                    "&useLegacyDatetimeCode=false" +
+                    "&amp" +
+                    "&serverTimezone=UTC";
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            dbConnection = DriverManager.getConnection(connectionString, dbUser, dbPass);
 
-        dbConnection = DriverManager.getConnection(connectionString, dbUser, dbPass);
-        return dbConnection;
-    }
+        }
 
-    public void RegisterUser(User user) {
+
+
+    public void RegisterUser(User user) throws SQLException, ClassNotFoundException {
+        getDbConnection();
         String insert = "INSERT INTO " + Const.USER_TABLE + "(" + Const.USERS_FIRSTNAME + "," + Const.USERS_LASTNAME + "," + Const.USERS_USERNAME + "," + Const.USERS_PASSWORD + ")" + "VALUES(?,?,?,?)";
 
 
         try {
-            PreparedStatement prSt = getDbConnection().prepareStatement(insert);
+            PreparedStatement prSt = dbConnection.prepareStatement(insert);
             prSt.setString(1, user.getFirstname());
             prSt.setString(2, user.getLastname());
             prSt.setString(3, user.getUsername());
@@ -35,26 +43,78 @@ public class DatabaseHandler extends Configs {
             prSt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
         }
 
     }
 
-    public ResultSet getUser(User user) {
+    public ResultSet getUser(User user) throws SQLException, ClassNotFoundException {
+getDbConnection();
         ResultSet resSet = null;
         String select = "SELECT * FROM USERS WHERE USERNAME =? AND PASSWORD =?";
         try {
-            PreparedStatement prSt = getDbConnection().prepareStatement(select);
+            PreparedStatement prSt = dbConnection.prepareStatement(select);
             prSt.setString(1, user.getUsername());
             prSt.setString(2, user.getPassword());
             resSet = prSt.executeQuery();
         } catch (SQLException e) {
             e.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
         }
 
-return resSet;
+        return resSet;
     }
+
+
+
+
+@FXML
+    public void addtotable() {
+
+String x,y;
+        try {
+            File file = new File("C:\\Users\\mosto\\Desktop\\Values.csv");
+
+            FileReader fr = new FileReader(file);
+
+            BufferedReader reader = new BufferedReader(fr);
+
+            String line = reader.readLine();
+            while (line != null) {
+                 x = line.substring(0, 10);
+                 y = line.substring(11);
+                String insert = "INSERT INTO " + CurrencyConst.CURRENCY_TABLE + "(" + CurrencyConst.CURRENCY_DAY + "," + CurrencyConst.CURRENCY_COURSE + ")" + "VALUES(?,?)";
+                PreparedStatement prSt = dbConnection.prepareStatement(insert);
+                prSt.setString(1, x);
+                prSt.setString(2, y);
+                prSt.executeUpdate();
+                line = reader.readLine();
+            }
+
+
+
+            } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 }
+    @FXML
+    private void fileDownload(){
+        try {
+            URL url = new URL("https://raw.githubusercontent.com/Mostovik71/Informatika_2sem/master/values.csv");
+            InputStream inputStream = url.openStream();
+            File file=new File("C:\\Users\\mosto\\Desktop\\Курс доллара.txt");
+            if(!file.exists()) {
+                Files.copy(inputStream, new File("C:\\Users\\mosto\\Desktop\\Курс доллара.txt").toPath());
+            }else{
+                System.out.println("Файл уже существует");
+            }
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    }
+
