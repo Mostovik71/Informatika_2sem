@@ -1,0 +1,7 @@
+package sample;
+
+public class CurrencyConst {
+    public static final String CURRENCY_TABLE = "currency";
+    public static final String CURRENCY_DAY = "day";
+    public static final String CURRENCY_COURSE= "course";
+}
