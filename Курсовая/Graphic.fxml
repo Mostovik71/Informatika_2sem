@@ -28,10 +28,11 @@
                 <CheckBox fx:id="eraser" />
             </ToolBar>
         </VBox>
-        <Button layoutX="32.0" layoutY="637.0" mnemonicParsing="false" onAction="#file" prefHeight="25.0" prefWidth="129.0" text="Построить график" textFill="#ff7c00" />
+        <Button layoutX="32.0" layoutY="637.0" mnemonicParsing="false" onAction="#graph" prefHeight="25.0" prefWidth="129.0" text="Построить график" textFill="#ff7c00" />
         <Canvas fx:id="canvas" height="564.0" layoutX="38.0" layoutY="65.0" width="1297.0" />
         <Button layoutX="210.0" layoutY="637.0" mnemonicParsing="false" onAction="#calculator" prefHeight="25.0" prefWidth="167.0" text="Калькулятор валют" textFill="#ff7c00" />
         <Button layoutX="435.0" layoutY="637.0" mnemonicParsing="false" onAction="#draw" prefHeight="25.0" prefWidth="143.0" text="Маркер" textFill="#ff7c00" />
+      <Button layoutX="622.0" layoutY="637.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="119.0" onAction="#clear" text="Очистить" textFill="#ff7c00" />
 
 
     </children>
