@@ -1,0 +1,156 @@
+package sample;
+import java.io.*;
+import java.util.ArrayList;
+import java.util.Scanner;
+
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.scene.chart.LineChart;
+import javafx.scene.chart.XYChart;
+import javafx.scene.control.ColorPicker;
+import javafx.scene.control.Label;
+
+import java.io.*;
+import java.sql.Date;
+import java.util.ArrayList;
+import java.util.Scanner;
+
+public class Controller {
+    LineChart<Double, Double> lineChart;
+
+
+    @FXML
+    public void MNK() throws IOException {
+        ArrayList<Double> x = new ArrayList<>();
+        ArrayList<Double> y = new ArrayList<>();
+        File file = new File("C:\\Users\\mosto\\Desktop\\Values.csv");
+
+        FileReader fr = new FileReader(file);
+
+        BufferedReader reader = new BufferedReader(fr);
+        LineChart.Series<Double, Double> series = new LineChart.Series<>();
+        ObservableList<XYChart.Series<Double, Double>> lineChartData = FXCollections.observableArrayList();
+        String line = reader.readLine();
+
+        double sum_x = 0, sum_y = 0, sum_xx = 0, sum_xy = 0, sum_yy = 0;
+        while (line != null) {
+            double x1 = Double.parseDouble(line.substring(0, 2));
+            double y1 = Double.parseDouble(line.substring(11));
+            x.add(x1);
+            y.add(y1);
+            line = reader.readLine();
+            {
+
+                for (int i = 0; i < x.size(); i++) {
+
+                    sum_x += x.get(i);
+                    sum_y += y.get(i);
+                    sum_xx += x.get(i) * x.get(i);
+                    sum_xy += x.get(i) * y.get(i);
+                    sum_yy += y.get(i) * y.get(i);
+
+                }
+
+            }
+
+
+        }
+        double a, b;
+        b = (sum_xy * sum_x - sum_y * sum_xx) / (sum_x * sum_x - x.size() * sum_xx);
+        a = (sum_y - x.size() * b) / sum_x;
+        System.out.println("a=" + a);
+        System.out.println("b=" + b);
+        double[] X = new double[2];
+
+        double x0 = X[0];
+        double x1 = X[1];
+        double y0;
+        double y1;
+        String line1 = reader.readLine();
+        while (line1 != null) {
+            if (line1.substring(1, 2).equals("1") && line1.substring(4, 5).equals("1")) {
+                x0 = Double.parseDouble(line.substring(1, 2));
+            }
+            if (line1.substring(0, 2).equals("31") && line1.substring(1, 2).equals("1")) {
+                x1 = Double.parseDouble(line.substring(0, 2));
+            }
+            line1 = reader.readLine();
+        }
+
+        y0 = a * x0 + b;
+        y1 = a * x1 + b;
+        System.out.println(x0);
+        System.out.println(y0);
+        System.out.println(x1);
+        System.out.println(y1);
+        // series.getData().add(new XYChart.Data<>(x0, y0));
+        // series.getData().add(new XYChart.Data<>(x1, y1));
+        //lineChartData.add(series);
+        // lineChart.setData(lineChartData);
+
+    }
+
+    @FXML
+    public void sqr() throws IOException {
+        ArrayList<Double> x = new ArrayList<>();
+        ArrayList<Double> y = new ArrayList<>();
+        File file = new File("C:\\Users\\mosto\\Desktop\\Values.csv");
+
+        FileReader fr = new FileReader(file);
+
+        BufferedReader reader = new BufferedReader(fr);
+
+        String line = reader.readLine();
+        double sum_y = 0;
+        double sum_xy = 0;
+        double sum_x2y = 0;
+        double sum_x = 0;
+        double sum_x_2 = 0;
+        double sum_x_3 = 0;
+        double sum_x_4 = 0;
+        while (line != null) {
+            double x1 = Double.parseDouble(line.substring(0, 2));
+            double y1 = Double.parseDouble(line.substring(11));
+            x.add(x1);
+            y.add(y1);
+            line = reader.readLine();
+            for (int i = 0; i < y.size(); i++) {
+                sum_y += y.get(i);
+                sum_xy += y.get(i) * i;
+                sum_x2y += y.get(i) * i * i;
+                sum_x += i;
+                sum_x_2 += i * i;
+                sum_x_3 += i * i * i;
+                sum_x_4 += i * i * i * i;
+            }
+
+
+        }
+        double det = y.size() * sum_x_2 * sum_x_4 + sum_x_3 * sum_x * sum_x_2 + sum_x_3 * sum_x * sum_x_2
+                - sum_x_2 * sum_x_2 * sum_x_2 - sum_x_3 * sum_x_3 * y.size() - sum_x_4 * sum_x * sum_x;
+        double det1 = y.size() * sum_x_2 * sum_x2y + sum_y * sum_x * sum_x_3 + sum_xy * sum_x * sum_x_2
+                - sum_y * sum_x_2 * sum_x_2 - sum_x_3 * y.size() * sum_xy - sum_x2y * sum_x * sum_x;
+        double det2 = y.size() * sum_xy * sum_x_4 + sum_x2y * sum_x * sum_x_2 + sum_x_3 * sum_y * sum_x_2
+                - sum_x_2 * sum_x_2 * sum_xy - sum_x_3 * sum_x2y * y.size() - sum_x_4 * sum_y * sum_x;
+        double det3 = sum_y * sum_x_2 * sum_x_4 + sum_x_3 * sum_xy * sum_x_2 + sum_x_3 * sum_x * sum_x2y
+                - sum_x_2 * sum_x_2 * sum_x2y - sum_x_3 * sum_x_3 * sum_y - sum_x_4 * sum_x * sum_xy;
+     double  a = det1 / det;
+     double  b = det2 / det;
+        double c= det3 / det;
+        System.out.println("a=" + a);
+        System.out.println("b=" + b);
+        System.out.println("c=" + c);
+
+
+    }
+}
+
+
+
+
+
+
+
+
