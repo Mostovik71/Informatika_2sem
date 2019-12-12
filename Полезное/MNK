@@ -1,0 +1,79 @@
+package sample;
+import java.io.*;
+import java.util.ArrayList;
+import java.util.Scanner;
+
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.scene.chart.LineChart;
+import javafx.scene.chart.XYChart;
+import javafx.scene.control.ColorPicker;
+import javafx.scene.control.Label;
+
+import java.io.*;
+import java.sql.Date;
+import java.util.ArrayList;
+import java.util.Scanner;
+
+public class Controller {
+    LineChart<Double, Double> lineChart;
+    Scanner sc = new Scanner(System.in);
+
+    @FXML
+    public void MNK() throws IOException {
+        ArrayList<Double> x = new ArrayList<>();
+        ArrayList<Double> y = new ArrayList<>();
+        File file = new File("C:\\Users\\mosto\\Desktop\\Values.csv");
+
+        FileReader fr = new FileReader(file);
+
+        BufferedReader reader = new BufferedReader(fr);
+
+        String line = reader.readLine();
+
+        double sum_x = 0, sum_y = 0, sum_xx = 0, sum_xy = 0, sum_yy = 0;
+        while (line != null) {
+            double x1 = Double.parseDouble(line.substring(0, 2));
+            double y1 = Double.parseDouble(line.substring(11));
+            x.add(x1);
+            y.add(y1);
+            line = reader.readLine();
+            {
+
+                for (int i = 0; i < x.size(); i++) {
+
+                    sum_x += x.get(i);
+                    sum_y += y.get(i);
+                    sum_xx += x.get(i) * x.get(i);
+                    sum_xy += x.get(i) * y.get(i);
+                    sum_yy += y.get(i) * y.get(i);
+
+                }
+
+            }
+
+
+        }
+        double a, b;
+        b = (sum_xy * sum_x - sum_y * sum_xx) / (sum_x * sum_x - x.size() * sum_xx);
+        a = (sum_y - x.size() * b) / sum_x;
+        System.out.println("a=" + a);
+        System.out.println("b=" + b);
+        double[] X = new double[2];
+
+        for (int i = 0; i < X.length; i++) {
+            X[i] = sc.nextDouble();
+
+
+        }
+
+    }
+}
+
+
+
+
+
+
+
+
