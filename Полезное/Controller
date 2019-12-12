@@ -25,7 +25,7 @@ public class Controller {
     public void MNK() throws IOException {
         ArrayList<Double> x = new ArrayList<>();
         ArrayList<Double> y = new ArrayList<>();
-        File file = new File("C:\\Users\\mosto\\Desktop\\Values.csv");
+        File file = new File("C:\\Users\\mosto\\Desktop\\temp.csv");
 
         FileReader fr = new FileReader(file);
 
@@ -94,15 +94,6 @@ public class Controller {
 
     @FXML
     public void sqr() throws IOException {
-        ArrayList<Double> x = new ArrayList<>();
-        ArrayList<Double> y = new ArrayList<>();
-        File file = new File("C:\\Users\\mosto\\Desktop\\Values.csv");
-
-        FileReader fr = new FileReader(file);
-
-        BufferedReader reader = new BufferedReader(fr);
-
-        String line = reader.readLine();
         double sum_y = 0;
         double sum_xy = 0;
         double sum_x2y = 0;
@@ -110,6 +101,16 @@ public class Controller {
         double sum_x_2 = 0;
         double sum_x_3 = 0;
         double sum_x_4 = 0;
+        ArrayList<Double> x = new ArrayList<>();
+        ArrayList<Double> y = new ArrayList<>();
+        File file = new File("C:\\Users\\mosto\\Desktop\\temp.csv");
+
+        FileReader fr = new FileReader(file);
+
+        BufferedReader reader = new BufferedReader(fr);
+
+        String line = reader.readLine();
+
         while (line != null) {
             double x1 = Double.parseDouble(line.substring(0, 2));
             double y1 = Double.parseDouble(line.substring(11));
@@ -142,6 +143,44 @@ public class Controller {
         System.out.println("a=" + a);
         System.out.println("b=" + b);
         System.out.println("c=" + c);
+
+
+    }
+    @FXML
+    public void exp() throws IOException {
+        double sum_lny = 0;
+        double sum_x2 = 0;
+        double sum_lny_x=0;
+        double sum_x=0;
+        ArrayList<Double> x = new ArrayList<>();
+        ArrayList<Double> y = new ArrayList<>();
+        File file = new File("C:\\Users\\mosto\\Desktop\\temp.csv");
+
+        FileReader fr = new FileReader(file);
+
+        BufferedReader reader = new BufferedReader(fr);
+
+        String line = reader.readLine();
+        while (line != null) {
+            double x1 = Double.parseDouble(line.substring(0, 2));
+            double y1 = Double.parseDouble(line.substring(11));
+            x.add(x1);
+            y.add(y1);
+            line = reader.readLine();
+        }
+
+
+        for (int i = 0; i < y.size(); i++) {
+            sum_lny += Math.log(y.get(i));
+            sum_lny_x += Math.log(y.get(i)) * i;
+            sum_x2 += i*i;
+            sum_x +=i;
+        }
+        double a = (sum_lny * sum_x2 - sum_lny_x*sum_x) / (y.size() * sum_x2- sum_x*sum_x);
+        double b = (y.size() * sum_lny_x - sum_lny * sum_x) / (y.size() * sum_x2- sum_x*sum_x);
+        System.out.println("a=" + a);
+        System.out.println("b=" + b);
+
 
 
     }
