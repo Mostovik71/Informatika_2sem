@@ -3,6 +3,8 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.chart.LineChart;
@@ -17,7 +19,8 @@ import java.util.Scanner;
 
 public class Controller {
     LineChart<Double, Double> lineChart;
-    Scanner sc = new Scanner(System.in);
+
+
 
     @FXML
     public void MNK() throws IOException {
@@ -28,7 +31,8 @@ public class Controller {
         FileReader fr = new FileReader(file);
 
         BufferedReader reader = new BufferedReader(fr);
-
+        LineChart.Series<Double, Double> series = new LineChart.Series<>();
+        ObservableList<XYChart.Series<Double, Double>> lineChartData=FXCollections.observableArrayList();
         String line = reader.readLine();
 
         double sum_x = 0, sum_y = 0, sum_xx = 0, sum_xy = 0, sum_yy = 0;
@@ -61,14 +65,40 @@ public class Controller {
         System.out.println("b=" + b);
         double[] X = new double[2];
 
-        for (int i = 0; i < X.length; i++) {
-            X[i] = sc.nextDouble();
-
-
+        double x0=X[0];
+        double x1=X[1];
+        double y0;
+        double y1;
+        String line1 = reader.readLine();
+        while (line1!= null) {
+            if ( line1.substring(1, 2).equals("1")&&line1.substring(4, 5).equals("1") ) {
+                x0 = Double.parseDouble(line.substring(1, 2));
+            }
+            if (line1.substring(0, 2).equals("31") && line1.substring(1, 2).equals("1")) {
+                x1 = Double.parseDouble(line.substring(0, 2));
+            }
+            line1 = reader.readLine();
         }
+
+        y0=a*x0+b;
+        y1=a*x1+b;
+        System.out.println(x0);
+        System.out.println(y0);
+        System.out.println(x1);
+        System.out.println(y1);
+       // series.getData().add(new XYChart.Data<>(x0, y0));
+       // series.getData().add(new XYChart.Data<>(x1, y1));
+        //lineChartData.add(series);
+       // lineChart.setData(lineChartData);
 
     }
 }
+
+
+
+
+
+
 
 
 
