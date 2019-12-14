@@ -16,7 +16,7 @@
     <children>
         <LineChart fx:id="lineChart" layoutY="52.0" prefHeight="576.0" prefWidth="1334.0">
             <xAxis>
-                <NumberAxis fx:id="xAxis" side="BOTTOM" />
+                <NumberAxis side="BOTTOM" fx:id="xAxis" />
             </xAxis>
             <yAxis>
                 <NumberAxis fx:id="yAxis" side="LEFT" />
@@ -29,13 +29,15 @@
                 <CheckBox fx:id="eraser" />
             </ToolBar>
         </VBox>
-        <Button layoutX="32.0" layoutY="637.0" mnemonicParsing="false" onAction="#btn" prefHeight="25.0" prefWidth="129.0" text="Построить график" textFill="#ff7c00" />
-        <Canvas fx:id="canvas" height="564.0" layoutX="38.0" layoutY="65.0" width="1297.0" />
-        <Button layoutX="210.0" layoutY="637.0" mnemonicParsing="false" onAction="#calculator" prefHeight="25.0" prefWidth="167.0" text="Калькулятор валют" textFill="#ff7c00" />
-        <Button layoutX="435.0" layoutY="637.0" mnemonicParsing="false" onAction="#draw" prefHeight="25.0" prefWidth="143.0" text="Маркер" textFill="#ff7c00" />
-      <Button layoutX="622.0" layoutY="637.0" mnemonicParsing="false" onAction="#clear" prefHeight="25.0" prefWidth="119.0" text="Очистить" textFill="#ff7c00" />
-      <ComboBox fx:id="comboBox" layoutX="345.0" layoutY="5.0" prefWidth="150.0" />
-      <Button layoutX="526.0" layoutY="5.0" mnemonicParsing="false" onAction="#com" text="Заполнить" textFill="#ff7c00" />
+       <Button layoutX="48.0" layoutY="637.0" mnemonicParsing="false"  prefHeight="25.0" prefWidth="129.0" text="Построить график" textFill="#ff7c00" />
+        <Canvas fx:id="canvas" height="525.0" layoutX="42.0" layoutY="66.0" width="1279.0" />
+        <Button layoutX="383.0" layoutY="637.0" mnemonicParsing="false" onAction="#draw" prefHeight="25.0" prefWidth="143.0" text="Маркер" textFill="#ff7c00" />
+      <Button layoutX="548.0" layoutY="637.0" mnemonicParsing="false" onAction="#clear" prefHeight="25.0" prefWidth="119.0" text="Очистить" textFill="#ff7c00" />
+      <ComboBox fx:id="comboBoxMonths" layoutX="345.0" layoutY="5.0" prefWidth="150.0" />
+      <Button layoutX="526.0" layoutY="5.0" mnemonicParsing="false" onAction="#comboMon" text="Заполнить" textFill="#ff7c00" />
+      <ComboBox fx:id="comboBoxRegression" layoutX="800.0" layoutY="5.0" prefWidth="150.0" />
+      <Button layoutX="972.0" layoutY="5.0" mnemonicParsing="false" onAction="#comboRegr" text="Заполнить" textFill="#ff7c00" />
+      <Button layoutX="204.0" layoutY="637.0" mnemonicParsing="false" prefHeight="25.0" onAction="#buildRegr" prefWidth="143.0" text="Построить регрессию" textFill="#ff7c00" />
 
 
     </children>
