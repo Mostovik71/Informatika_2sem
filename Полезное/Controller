@@ -1,5 +1,5 @@
-package com.company.vladik;
 
+package sample;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -12,7 +12,8 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class aprrr {
+public class Controller {
+    @FXML
     LineChart<Double, Double> lineChart;
 
 
@@ -22,7 +23,7 @@ public class aprrr {
 
         ArrayList<Double> x = new ArrayList<>();
         ArrayList<Double> y = new ArrayList<>();
-        File file = new File("C:\\Users\\pc\\Desktop\\temp.csv");
+        File file = new File("C:\\Users\\mosto\\Desktop\\temp.csv");
 
         FileReader fr = new FileReader(file);
 
@@ -30,9 +31,8 @@ public class aprrr {
 
 
         String line = reader.readLine();
-
+series.setName("Linear");
         double sum_x = 0, sum_y = 0, sum_xx = 0, sum_xy = 0, sum_yy = 0;
-        //double[] X = new double[2];
         double x0=0;
         double x1=0;
         double y0;
@@ -43,7 +43,7 @@ public class aprrr {
             x.add(x1);
             y.add(y1);
 
-            System.out.println(line);
+
             for (int i = 0; i < x.size(); i++) {
                 sum_x += x.get(i);
                 sum_y += y.get(i);
@@ -71,14 +71,22 @@ public class aprrr {
         System.out.println(y0 + " y0");
         System.out.println(x1 + " x1");
         System.out.println(y1 + " y1");
-        series.getData().add(new XYChart.Data(1, 2));
-        series.getData().add(new XYChart.Data(5, 6));
-        System.out.println("qw3");
+        series.getData().add(new XYChart.Data(x0, y0));
+        series.getData().add(new XYChart.Data(x1, y1));
         lineChart.getData().add(series);
     }
 
     @FXML
     public void sqr() throws IOException {
+        XYChart.Series series = new XYChart.Series();
+        double x0;
+        double x1=0;
+        double x2=0;
+        double y0=0;
+        double y1=0;
+        double y2=0;
+
+
         double sum_y = 0;
         double sum_xy = 0;
         double sum_x2y = 0;
@@ -86,9 +94,9 @@ public class aprrr {
         double sum_x_2 = 0;
         double sum_x_3 = 0;
         double sum_x_4 = 0;
-        ArrayList<Double> x = new ArrayList<>();
-        ArrayList<Double> y = new ArrayList<>();
-        File file = new File("C:\\Users\\pc\\Desktop\\temp.csv");
+        ArrayList<Double> X = new ArrayList<>();
+        ArrayList<Double> Y = new ArrayList<>();
+        File file = new File("C:\\Users\\mosto\\Desktop\\temp.csv");
 
         FileReader fr = new FileReader(file);
 
@@ -97,29 +105,32 @@ public class aprrr {
         String line = reader.readLine();
 
         while (line != null) {
-            double x1 = Double.parseDouble(line.substring(0, 2));
-            double y1 = Double.parseDouble(line.substring(11));
-            x.add(x1);
-            y.add(y1);
-            line = reader.readLine();
-            for (int i = 0; i < y.size(); i++) {
-                sum_y += y.get(i);
-                sum_xy += y.get(i) * i;
-                sum_x2y += y.get(i) * i * i;
+            double x = Double.parseDouble(line.substring(0, 2));
+            double y = Double.parseDouble(line.substring(11));
+            X.add(x);
+            Y.add(y);
+
+            for (int i = 0; i < Y.size(); i++) {
+                sum_y += Y.get(i);
+                sum_xy += Y.get(i) * i;
+                sum_x2y += Y.get(i) * i * i;
                 sum_x += i;
                 sum_x_2 += i * i;
                 sum_x_3 += i * i * i;
                 sum_x_4 += i * i * i * i;
+
             }
 
 
+            line = reader.readLine();
+
         }
-        double det = y.size() * sum_x_2 * sum_x_4 + sum_x_3 * sum_x * sum_x_2 + sum_x_3 * sum_x * sum_x_2
-                - sum_x_2 * sum_x_2 * sum_x_2 - sum_x_3 * sum_x_3 * y.size() - sum_x_4 * sum_x * sum_x;
-        double det1 = y.size() * sum_x_2 * sum_x2y + sum_y * sum_x * sum_x_3 + sum_xy * sum_x * sum_x_2
-                - sum_y * sum_x_2 * sum_x_2 - sum_x_3 * y.size() * sum_xy - sum_x2y * sum_x * sum_x;
-        double det2 = y.size() * sum_xy * sum_x_4 + sum_x2y * sum_x * sum_x_2 + sum_x_3 * sum_y * sum_x_2
-                - sum_x_2 * sum_x_2 * sum_xy - sum_x_3 * sum_x2y * y.size() - sum_x_4 * sum_y * sum_x;
+        double det = Y.size() * sum_x_2 * sum_x_4 + sum_x_3 * sum_x * sum_x_2 + sum_x_3 * sum_x * sum_x_2
+                - sum_x_2 * sum_x_2 * sum_x_2 - sum_x_3 * sum_x_3 * Y.size() - sum_x_4 * sum_x * sum_x;
+        double det1 = Y.size() * sum_x_2 * sum_x2y + sum_y * sum_x * sum_x_3 + sum_xy * sum_x * sum_x_2
+                - sum_y * sum_x_2 * sum_x_2 - sum_x_3 * Y.size() * sum_xy - sum_x2y * sum_x * sum_x;
+        double det2 = Y.size() * sum_xy * sum_x_4 + sum_x2y * sum_x * sum_x_2 + sum_x_3 * sum_y * sum_x_2
+                - sum_x_2 * sum_x_2 * sum_xy - sum_x_3 * sum_x2y * Y.size() - sum_x_4 * sum_y * sum_x;
         double det3 = sum_y * sum_x_2 * sum_x_4 + sum_x_3 * sum_xy * sum_x_2 + sum_x_3 * sum_x * sum_x2y
                 - sum_x_2 * sum_x_2 * sum_x2y - sum_x_3 * sum_x_3 * sum_y - sum_x_4 * sum_x * sum_xy;
         double  a = det1 / det;
@@ -130,6 +141,12 @@ public class aprrr {
         System.out.println("c=" + c);
 
 
+
+
+
+series.setName("Парабола");
+        lineChart.getData().add(series);
+
     }
     @FXML
     public void exp() throws IOException {
@@ -139,7 +156,7 @@ public class aprrr {
         double sum_x=0;
         ArrayList<Double> x = new ArrayList<>();
         ArrayList<Double> y = new ArrayList<>();
-        File file = new File("C:\\Users\\pc\\Desktop\\temp.csv");
+        File file = new File("C:\\Users\\mosto\\Desktop\\temp.csv");
 
         FileReader fr = new FileReader(file);
 
@@ -155,7 +172,7 @@ public class aprrr {
         }
 
 
-        for (int i = 0; i < y.size(); i++) {
+        for (int i = 1; i < y.size(); i++) {
             sum_lny += Math.log(y.get(i));
             sum_lny_x += Math.log(y.get(i)) * i;
             sum_x2 += i*i;
@@ -170,9 +187,3 @@ public class aprrr {
 
     }
 }
-
-
-
-
-
-
