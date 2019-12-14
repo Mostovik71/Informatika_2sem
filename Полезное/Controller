@@ -7,74 +7,75 @@ import javafx.fxml.FXML;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.XYChart;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
+import java.util.Collections;
+
+import static java.lang.Math.sqrt;
 
 public class Controller {
+
+
     @FXML
     LineChart<Double, Double> lineChart;
 
+    ArrayList<Double> X = new ArrayList<>();
+    ArrayList<Double> Y = new ArrayList<>();
 
+    double x, y;
+    File file = new File("C:\\Users\\mosto\\Desktop\\temp.csv");
+
+    FileReader fr = new FileReader(file);
+
+    BufferedReader reader = new BufferedReader(fr);
+
+    String line = reader.readLine();
+
+    public Controller() throws IOException {
+    }
+    public void add() throws IOException {
+        while (line != null) {
+            x = Double.parseDouble(line.substring(0, 2));
+            y = Double.parseDouble(line.substring(11));
+            X.add(x);
+            Y.add(y);
+            line = reader.readLine();
+        }
+
+    }
     @FXML
     public void MNK() throws IOException {
         XYChart.Series series = new XYChart.Series();
 
-        ArrayList<Double> x = new ArrayList<>();
-        ArrayList<Double> y = new ArrayList<>();
-        File file = new File("C:\\Users\\mosto\\Desktop\\temp.csv");
-
-        FileReader fr = new FileReader(file);
-
-        BufferedReader reader = new BufferedReader(fr);
-
-
-        String line = reader.readLine();
-series.setName("Linear");
         double sum_x = 0, sum_y = 0, sum_xx = 0, sum_xy = 0, sum_yy = 0;
-        double x0=0;
-        double x1=0;
-        double y0;
-        double y1;
-        while (line != null) {
-            x1 = Double.parseDouble(line.substring(0, 2));
-            y1 = Double.parseDouble(line.substring(11));
-            x.add(x1);
-            y.add(y1);
+        add();
 
-
-            for (int i = 0; i < x.size(); i++) {
-                sum_x += x.get(i);
-                sum_y += y.get(i);
-                sum_xx += x.get(i) * x.get(i);
-                sum_xy += x.get(i) * y.get(i);
-                sum_yy += y.get(i) * y.get(i);
-            }
-            if (line.substring(0,2).equals("01") && line.substring(4, 5).equals("1")) {
-                x0 = Double.parseDouble(line.substring(0, 2));
-            }
-            if (line.substring(0, 2).equals("31") && line.substring(1, 2).equals("1")) {
-                x1 = Double.parseDouble(line.substring(0, 2));
-            }
-            line = reader.readLine();
+        for (int i = 0; i < X.size(); i++) {
+            sum_x += X.get(i);
+            sum_y += X.get(i);
+            sum_xx += X.get(i) * X.get(i);
+            sum_xy += X.get(i) * Y.get(i);
+            sum_yy += Y.get(i) * Y.get(i);
         }
+
         double a, b;
-        b = (sum_xy * sum_x - sum_y * sum_xx) / (sum_x * sum_x - x.size() * sum_xx);
-        a = (sum_y - x.size() * b) / sum_x;
+        b = (sum_xy * sum_x - sum_y * sum_xx) / (sum_x * sum_x - X.size() * sum_xx);
+        a = (sum_y - X.size() * b) / sum_x;
         System.out.println("a=" + a);
         System.out.println("b=" + b);
 
-        y0 = a * x0 + b;
-        y1 = a * x1 + b;
-        System.out.println(x0 + " x0");
-        System.out.println(y0 + " y0");
-        System.out.println(x1 + " x1");
-        System.out.println(y1 + " y1");
-        series.getData().add(new XYChart.Data(x0, y0));
-        series.getData().add(new XYChart.Data(x1, y1));
+
+
+
+        for (int i = 0; i < X.size(); i++) {
+            double y = a *X.get(i) +b;
+
+            series.getData().add(new XYChart.Data<>(X.get(i), y));
+        }
+
+        series.setName("Прямая");
         lineChart.getData().add(series);
+
     }
 
     @FXML
@@ -87,36 +88,16 @@ series.setName("Linear");
         double sum_x_2 = 0;
         double sum_x_3 = 0;
         double sum_x_4 = 0;
-        ArrayList<Double> X = new ArrayList<>();
-        ArrayList<Double> Y = new ArrayList<>();
-        File file = new File("C:\\Users\\mosto\\Desktop\\temp.csv");
 
-        FileReader fr = new FileReader(file);
-
-        BufferedReader reader = new BufferedReader(fr);
-
-        String line = reader.readLine();
-
-        while (line != null) {
-            double x = Double.parseDouble(line.substring(0, 2));
-            double y = Double.parseDouble(line.substring(11));
-            X.add(x);
-            Y.add(y);
-
-            for (int i = 0; i < Y.size(); i++) {
-                sum_y += Y.get(i);
-                sum_xy += Y.get(i) * i;
-                sum_x2y += Y.get(i) * i * i;
-                sum_x += i;
-                sum_x_2 += i * i;
-                sum_x_3 += i * i * i;
-                sum_x_4 += i * i * i * i;
-
-            }
-
-
-            line = reader.readLine();
-
+        add();
+        for (int i = 0; i < Y.size(); i++) {
+            sum_y += Y.get(i);
+            sum_xy += Y.get(i) * i;
+            sum_x2y += Y.get(i) * i * i;
+            sum_x += i;
+            sum_x_2 += i * i;
+            sum_x_3 += i * i * i;
+            sum_x_4 += i * i * i * i;
         }
         double det = Y.size() * sum_x_2 * sum_x_4 + sum_x_3 * sum_x * sum_x_2 + sum_x_3 * sum_x * sum_x_2
                 - sum_x_2 * sum_x_2 * sum_x_2 - sum_x_3 * sum_x_3 * Y.size() - sum_x_4 * sum_x * sum_x;
@@ -126,65 +107,85 @@ series.setName("Linear");
                 - sum_x_2 * sum_x_2 * sum_xy - sum_x_3 * sum_x2y * Y.size() - sum_x_4 * sum_y * sum_x;
         double det3 = sum_y * sum_x_2 * sum_x_4 + sum_x_3 * sum_xy * sum_x_2 + sum_x_3 * sum_x * sum_x2y
                 - sum_x_2 * sum_x_2 * sum_x2y - sum_x_3 * sum_x_3 * sum_y - sum_x_4 * sum_x * sum_xy;
-        double  a = det1 / det;
-        double  b = det2 / det;
-        double  c= det3 / det;
+        double a = det1 / det;
+        double b = det2 / det;
+        double c = det3 / det;
         System.out.println("a=" + a);
         System.out.println("b=" + b);
         System.out.println("c=" + c);
+        for (int i = 0; i < X.size(); i++) {
+            double y = a *X.get(i) *X.get(i) + b * X.get(i) + c;
 
-
-        FileReader fr1 = new FileReader(file);
-        BufferedReader reader1 = new BufferedReader(fr1);
-        String line1 = reader1.readLine();
-        while (line1 != null) {
-            double x =  Double.parseDouble(line1.substring(0, 2));
-            double y=a*x*x+b*x+c;
-            series.getData().add(new XYChart.Data<>(x, y));
-            line1 = reader1.readLine();
-
+            series.getData().add(new XYChart.Data<>(X.get(i), y));
         }
-
         series.setName("Парабола");
         lineChart.getData().add(series);
 
     }
+
     @FXML
     public void exp() throws IOException {
+        XYChart.Series series = new XYChart.Series();
         double sum_lny = 0;
+      double  sum_lny_x=0;
         double sum_x2 = 0;
-        double sum_lny_x=0;
-        double sum_x=0;
-        ArrayList<Double> x = new ArrayList<>();
-        ArrayList<Double> y = new ArrayList<>();
-        File file = new File("C:\\Users\\mosto\\Desktop\\temp.csv");
+        double sum_x = 0;
 
-        FileReader fr = new FileReader(file);
+add();
+for (int i = 1; i < Y.size(); i++) {
+                sum_lny += Math.log(Y.get(i));
+                sum_x2 += X.get(i) * X.get(i);
+                sum_x += X.get(i);
+    sum_lny_x += Math.log(Y.get(i)) * i;
+            }
 
-        BufferedReader reader = new BufferedReader(fr);
-
-        String line = reader.readLine();
-        while (line != null) {
-            double x1 = Double.parseDouble(line.substring(0, 2));
-            double y1 = Double.parseDouble(line.substring(11));
-            x.add(x1);
-            y.add(y1);
-            line = reader.readLine();
-        }
-
-
-        for (int i = 1; i < y.size(); i++) {
-            sum_lny += Math.log(y.get(i));
-            sum_lny_x += Math.log(y.get(i)) * i;
-            sum_x2 += i*i;
-            sum_x +=i;
-        }
-        double a = (sum_lny * sum_x2 - sum_lny_x*sum_x) / (y.size() * sum_x2- sum_x*sum_x);
-        double b = (y.size() * sum_lny_x - sum_lny * sum_x) / (y.size() * sum_x2- sum_x*sum_x);
+            double b = (sum_lny * sum_x2 - sum_lny_x*sum_x) / (Y.size() * sum_x2- sum_x*sum_x);
+        double a = (Y.size() * sum_lny_x - sum_lny * sum_x) / (Y.size() * sum_x2- sum_x*sum_x);
         System.out.println("a=" + a);
         System.out.println("b=" + b);
 
+        for (int i = 0; i < X.size(); i++) {
+double y = Math.exp(a) * Math.exp(b*x);
+            series.getData().add(new XYChart.Data<>(X.get(i), y));
+        }
+        series.setName("Экспонента");
+        lineChart.getData().add(series);
 
+
+    }
+
+
+    @FXML
+    public void hyp() throws IOException {
+        XYChart.Series series = new XYChart.Series();
+        double sum_y_x = 0;
+        double sum_1_x = 0;
+        double sum_y = 0;
+        double sum_1_x2 = 0;
+        add();
+            for (int i = 0; i < Y.size(); i++) {
+                if (i != 0) {
+                    sum_1_x += 1 / (i);
+                    sum_1_x2 += 1 / ((i) * (i));
+                    sum_y_x += Y.get(i) / (i);
+                }
+                sum_y += Y.get(i);
+            }
+            double b = (Y.size() * sum_y_x - sum_1_x * sum_y) / (Y.size() * sum_1_x2 - sum_1_x * sum_1_x);
+        double a = sum_y / Y.size() - b * sum_1_x / Y.size();
+        System.out.println("a=" + a);
+        System.out.println("b=" + b);
+        for (int i = 0; i < X.size(); i++) {
+            double y = a+b/x;
+            series.getData().add(new XYChart.Data<>(X.get(i), y));
+        }
+        series.setName("Гипербола");
+        lineChart.getData().add(series);
+    }
+
+    public void clear(){
+        XYChart.Series series = new XYChart.Series();
+        series.getData().removeAll(Collections.singleton(lineChart.getData().setAll()));
 
     }
 }
