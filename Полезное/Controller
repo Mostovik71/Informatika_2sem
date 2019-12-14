@@ -1,4 +1,5 @@
 
+
 package sample;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -79,14 +80,6 @@ series.setName("Linear");
     @FXML
     public void sqr() throws IOException {
         XYChart.Series series = new XYChart.Series();
-        double x0;
-        double x1=0;
-        double x2=0;
-        double y0=0;
-        double y1=0;
-        double y2=0;
-
-
         double sum_y = 0;
         double sum_xy = 0;
         double sum_x2y = 0;
@@ -135,16 +128,24 @@ series.setName("Linear");
                 - sum_x_2 * sum_x_2 * sum_x2y - sum_x_3 * sum_x_3 * sum_y - sum_x_4 * sum_x * sum_xy;
         double  a = det1 / det;
         double  b = det2 / det;
-        double c= det3 / det;
+        double  c= det3 / det;
         System.out.println("a=" + a);
         System.out.println("b=" + b);
         System.out.println("c=" + c);
 
 
+        FileReader fr1 = new FileReader(file);
+        BufferedReader reader1 = new BufferedReader(fr1);
+        String line1 = reader1.readLine();
+        while (line1 != null) {
+            double x =  Double.parseDouble(line1.substring(0, 2));
+            double y=a*x*x+b*x+c;
+            series.getData().add(new XYChart.Data<>(x, y));
+            line1 = reader1.readLine();
 
+        }
 
-
-series.setName("Парабола");
+        series.setName("Парабола");
         lineChart.getData().add(series);
 
     }
