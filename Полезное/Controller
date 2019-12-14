@@ -134,18 +134,18 @@ public class Controller {
 add();
 for (int i = 1; i < Y.size(); i++) {
                 sum_lny += Math.log(Y.get(i));
-                sum_x2 += X.get(i) * X.get(i);
-                sum_x += X.get(i);
+                sum_x2 += i * i;
+                sum_x += i;
     sum_lny_x += Math.log(Y.get(i)) * i;
             }
 
-            double b = (sum_lny * sum_x2 - sum_lny_x*sum_x) / (Y.size() * sum_x2- sum_x*sum_x);
-        double a = (Y.size() * sum_lny_x - sum_lny * sum_x) / (Y.size() * sum_x2- sum_x*sum_x);
+            double a = (sum_lny * sum_x2 - sum_lny_x*sum_x) / (Y.size() * sum_x2- sum_x*sum_x);
+        double b = (Y.size() * sum_lny_x - sum_lny * sum_x) / (Y.size() * sum_x2- sum_x*sum_x);
         System.out.println("a=" + a);
         System.out.println("b=" + b);
 
         for (int i = 0; i < X.size(); i++) {
-double y = Math.exp(a) * Math.exp(b*x);
+double y = Math.exp(a) * Math.exp(b*X.get(i));
             series.getData().add(new XYChart.Data<>(X.get(i), y));
         }
         series.setName("Экспонента");
@@ -176,7 +176,7 @@ double y = Math.exp(a) * Math.exp(b*x);
         System.out.println("a=" + a);
         System.out.println("b=" + b);
         for (int i = 0; i < X.size(); i++) {
-            double y = a+b/x;
+            double y = a+b/X.get(i);
             series.getData().add(new XYChart.Data<>(X.get(i), y));
         }
         series.setName("Гипербола");
