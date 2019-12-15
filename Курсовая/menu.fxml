@@ -5,9 +5,12 @@
 
 <AnchorPane prefHeight="676.0" prefWidth="990.0" style="-fx-background-color: #000000;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Glava1Controller">
 <children>
-    <Button layoutX="360.0" layoutY="247.0" mnemonicParsing="false" onAction="#reg" prefHeight="25.0" prefWidth="271.0" text="Построение графика" textFill="#ff7c00" />
-    <Button layoutX="360.0" layoutY="303.0" mnemonicParsing="false" onAction="#calculator" prefHeight="25.0" prefWidth="271.0" text="Калькулятор валют" textFill="#ff7c00" />
+    <Button layoutX="344.0" layoutY="204.0" mnemonicParsing="false" onAction="#reg" prefHeight="25.0" prefWidth="271.0" text="Работа с графиком" textFill="#ff7c00" />
+    <Button layoutX="344.0" layoutY="258.0" mnemonicParsing="false" onAction="#calculator" prefHeight="25.0" prefWidth="271.0" text="Калькулятор валют" textFill="#ff7c00" />
 
-      <Button layoutX="360.0" layoutY="358.0" mnemonicParsing="false" onAction="#dbopen" prefHeight="25.0" prefWidth="271.0" text="Работа с базой данных" textFill="#ff7c00" />
+      <Button layoutX="344.0" layoutY="313.0" mnemonicParsing="false" onAction="#dbopen" prefHeight="25.0" prefWidth="271.0" text="Работа с базой данных" textFill="#ff7c00" />
+      <Button fx:id="bck2" layoutX="832.0" layoutY="637.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="144.0" onAction="#back2" text="Назад" textFill="#ff7c00" />
+
 </children>
 </AnchorPane>
+
