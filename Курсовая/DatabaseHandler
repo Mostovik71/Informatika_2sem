@@ -99,22 +99,7 @@ String x,y;
             e.printStackTrace();
         }
 }
-    @FXML
-    private void fileDownload(){
-        try {
-            URL url = new URL("https://raw.githubusercontent.com/Mostovik71/Informatika_2sem/master/values.csv");
-            InputStream inputStream = url.openStream();
-            File file=new File("C:\\Users\\mosto\\Desktop\\Курс доллара.txt");
-            if(!file.exists()) {
-                Files.copy(inputStream, new File("C:\\Users\\mosto\\Desktop\\Курс доллара.txt").toPath());
-            }else{
-                System.out.println("Файл уже существует");
-            }
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+
     }
-    }
+
 
