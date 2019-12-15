@@ -38,6 +38,7 @@
       <Label layoutX="177.0" layoutY="44.0" text="Выберите цвет графика" textFill="#ff7c00" />
       <Label layoutX="403.0" layoutY="15.0" text="Стерка" textFill="#ff7c00" />
       <Label layoutX="548.0" layoutY="15.0" text="Выберите тип регрессии" textFill="#ff7c00" />
+      <Button fx:id="bck3" layoutX="1205.0" layoutY="637.0" mnemonicParsing="false" prefHeight="25.0" onAction="#back3" prefWidth="101.0" text="Назад" textFill="#ff7c00" />
 
 
     </children>
