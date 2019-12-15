@@ -60,10 +60,20 @@ public class Glava1Controller {
     AnchorPane pane;
     @FXML
     private Canvas canvas;
+    public void GraphBorders(){
+    xAxis.setAutoRanging(false);
+    xAxis.setLowerBound(-1);
+    xAxis.setUpperBound(20);
+    xAxis.setTickUnit(10);
+    yAxis.setAutoRanging(false);
+    yAxis.setLowerBound(-100);
+    yAxis.setUpperBound(100);
+    yAxis.setTickUnit(10);
+}
     ArrayList<Double> X = new ArrayList<>();
     ArrayList<Double> Y = new ArrayList<>();
     double x, y;
-    File file = new File("C:\\Users\\mosto\\Desktop\\temp.csv");
+    File file = new File("C:\\Users\\mosto\\Desktop\\Values.csv");
 
     FileReader fr = new FileReader(file);
 
@@ -74,7 +84,7 @@ public class Glava1Controller {
 
     public void add() throws IOException {
         while (line != null) {
-            x = Double.parseDouble(line.substring(0, 2));
+            x = Double.parseDouble(line.substring(8, 10));
             y = Double.parseDouble(line.substring(11));
             X.add(x);
             Y.add(y);
@@ -82,13 +92,8 @@ public class Glava1Controller {
         }
 
     }
-
-
-
-
-
     @FXML
- ComboBox<String> comboBoxRegression;
+    ComboBox<String> comboBoxRegression;
     ObservableList<String> comboRegr = FXCollections.observableArrayList("Линейная аппроксимация","Квадратичная аппроксимация","Гиперболическая аппроксимация","Экспоненциальная аппроксимация");
 
     public Glava1Controller() throws IOException {
@@ -113,20 +118,10 @@ linear();
         }
 
     }
-
-
-    @FXML
-    ComboBox<String> comboBoxMonths;
-    ObservableList<String> comboMonths = FXCollections.observableArrayList("Декабрь","Январь","Февраль","Март","Апрель","Май","Июнь","Июль","Август","Сентябрь","Октябрь","Ноябрь");
-public void comboMon() {
-    comboBoxMonths.setItems(comboMonths);
-    }
-
-
-
     @FXML
     public void linear() throws IOException {
-        XYChart.Series series = new XYChart.Series();
+        GraphBorders();
+    XYChart.Series series = new XYChart.Series();
 
         double sum_x = 0, sum_y = 0, sum_xx = 0, sum_xy = 0, sum_yy = 0;
         add();
@@ -150,18 +145,20 @@ public void comboMon() {
 
         for (int i = 0; i < X.size(); i++) {
             double y = a *X.get(i) +b;
-
             series.getData().add(new XYChart.Data<>(X.get(i), y));
         }
 
-        series.setName("Прямая");
+        series.setName("Линейная аппроксимация");
         lineChart.getData().add(series);
+        lineChart.setCreateSymbols(false);
 
     }
 
     @FXML
     public void sqr() throws IOException {
+        GraphBorders();
         XYChart.Series series = new XYChart.Series();
+
         double sum_y = 0;
         double sum_xy = 0;
         double sum_x2y = 0;
@@ -199,13 +196,14 @@ public void comboMon() {
 
             series.getData().add(new XYChart.Data<>(X.get(i), y));
         }
-        series.setName("Парабола");
+        series.setName("Квадратичная аппроксимация");
         lineChart.getData().add(series);
-
+        lineChart.setCreateSymbols(false);
     }
 
     @FXML
     public void exp() throws IOException {
+        GraphBorders();
         XYChart.Series series = new XYChart.Series();
         double sum_lny = 0;
         double  sum_lny_x=0;
@@ -229,8 +227,9 @@ public void comboMon() {
             double y = Math.exp(a) * Math.exp(b*X.get(i));
             series.getData().add(new XYChart.Data<>(X.get(i), y));
         }
-        series.setName("Экспонента");
+        series.setName("Экспоненциальная аппроксимация");
         lineChart.getData().add(series);
+        lineChart.setCreateSymbols(false);
 
 
     }
@@ -238,6 +237,7 @@ public void comboMon() {
 
     @FXML
     public void hyp() throws IOException {
+        GraphBorders();
         XYChart.Series series = new XYChart.Series();
         double sum_y_x = 0;
         double sum_1_x = 0;
@@ -260,82 +260,39 @@ public void comboMon() {
             double y = a+b/X.get(i);
             series.getData().add(new XYChart.Data<>(X.get(i), y));
         }
-        series.setName("Гипербола");
+        series.setName("Гиперболическая аппроксимация");
         lineChart.getData().add(series);
+        lineChart.setCreateSymbols(false);
     }
-
-
-
-
-
-   // public void btn(){
-     //   if (comboBoxMonths.getValue()=="Декабрь") {
-        //    december();
-      //  }
-
-       // }
-
-
-
-   /* public void december() {
-        xAxis.setAutoRanging(false);
-        xAxis.setLowerBound(0);
-        xAxis.setUpperBound(31);
-        xAxis.setTickUnit(10);
-        yAxis.setAutoRanging(false);
-        yAxis.setLowerBound(0);
-        yAxis.setUpperBound(100);
-        yAxis.setTickUnit(10);
-        try {
-            File file = new File("C:\\Users\\mosto\\Desktop\\Values.csv");
-
-            FileReader fr = new FileReader(file);
-
-            BufferedReader reader = new BufferedReader(fr);
-
-            String line = reader.readLine();
-
-            series.setName("Декабрь");
-            while (line != null) {
-                double x = Double.parseDouble(line.substring(0, 2));
-                double y = Double.parseDouble(line.substring(11));
-                if (line.substring(3, 5).equals("12")) {
-                    series.getData().add(new XYChart.Data<>(x, y));
-                }
-                line = reader.readLine();
-            }
-
-
-            lineChartData.add(series);
-            lineChart.setData(lineChartData);
-            Node line1 = series.getNode().lookup(".chart-series-line");
-
-            Color color = Color.valueOf(String.valueOf(colorPicker.getValue()));
-
-            String rgb = String.format("%d, %d, %d",
-                    (int) (color.getRed() * 255),
-                    (int) (color.getGreen() * 255),
-                    (int) (color.getBlue() * 255));
-
-            line1.setStyle("-fx-stroke: rgba(" + rgb + ", 1.0);");
-            lineChart.setCreateSymbols(false);
-
-
-
-
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+@FXML
+    public void monthGraph() throws IOException {
+    GraphBorders();
+    XYChart.Series series = new XYChart.Series();
+    series.setName("График");
+    add();
+    for (int i = 0; i < X.size(); i++) {
+        series.getData().add(new XYChart.Data<>(X.get(i), Y.get(i)));
     }
+    lineChart.getData().add(series);
 
-*/
+    Node line1 = series.getNode().lookup(".chart-series-line");
+
+    Color color = Color.valueOf(String.valueOf(colorPicker.getValue()));
+
+    String rgb = String.format("%d, %d, %d",
+            (int) (color.getRed() * 255),
+            (int) (color.getGreen() * 255),
+            (int) (color.getBlue() * 255));
+
+    line1.setStyle("-fx-stroke: rgba(" + rgb + ", 1.0);");
+    lineChart.setCreateSymbols(false);
+    }
 
     @FXML
     public void clear(){
         XYChart.Series series = new XYChart.Series();
         series.getData().removeAll(Collections.singleton(lineChart.getData().setAll()));
+
 
     }
 
@@ -403,6 +360,7 @@ public void comboMon() {
         stage.show();
     }
 }
+
 
 
 
