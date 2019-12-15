@@ -89,7 +89,7 @@ dbHandler.getUser(user);
     }
 
     public void newScene(String window){
-        rgstr.getScene().getWindow().hide();
+        rgstr.getScene().getWindow();
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource(window));
         try {
