@@ -15,5 +15,7 @@
       <Button fx:id="log" layoutX="494.0" layoutY="318.0" mnemonicParsing="false" text="Войти" textFill="#ff7c00" />
       <Button fx:id="rgstr" layoutX="494.0" layoutY="361.0" mnemonicParsing="false" text="Регистрация" textFill="#ff7c00" />
       <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#fileDownload" text="Загрузить файл" textFill="#ff7c00" />
+      <Label layoutX="115.0" layoutY="18.0" prefHeight="17.0" prefWidth="450.0" text=" - Скачать файл с данными для доступа к основному функционалу программы" textFill="#ff7c00" />
+      <Button fx:id="exit" layoutX="14.0" layoutY="361.0" mnemonicParsing="false" onAction="#ex" prefHeight="25.0" prefWidth="66.0" text="Выход" textFill="#ff7c00" />
    </children>
 </AnchorPane>
