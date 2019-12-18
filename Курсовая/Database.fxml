@@ -11,6 +11,8 @@
       <Button layoutX="14.0" layoutY="168.0" mnemonicParsing="false" onAction="#flrd" prefHeight="25.0" prefWidth="181.0" text="Просмотреть файл" textFill="#ff7c00" />
       <Label layoutX="202.0" layoutY="168.0" prefHeight="25.0" prefWidth="314.0" text="-Просмотр загруженного файла" textFill="#ff7c00" />
       <Button fx:id="dbbck" layoutX="524.0" layoutY="361.0" mnemonicParsing="false" onAction="#back1" text="Назад" textFill="#ff7c00" />
+      <Button layoutX="14.0" layoutY="117.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="181.0" text="Скачать файл" onAction="#fileDownload" textFill="#ff7c00" />
+      <Label layoutX="202.0" layoutY="117.0" prefHeight="25.0" prefWidth="314.0" text="-Загрузить файл" textFill="#ff7c00" />
     
 </children>
 </AnchorPane>
