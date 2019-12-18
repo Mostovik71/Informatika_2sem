@@ -83,16 +83,18 @@ public class Glava1Controller {
     ArrayList<Double> X = new ArrayList<>();
     ArrayList<Double> Y = new ArrayList<>();
     double x, y;
-    File file = new File("C:\\Users\\mosto\\Desktop\\Values.csv");
 
-    FileReader fr = new FileReader(file);
 
-    BufferedReader reader = new BufferedReader(fr);
-
-    String line = reader.readLine();
 
 
     public void add() throws IOException {
+        File file = new File("C:\\Users\\mosto\\Desktop\\Values.csv");
+
+        FileReader fr = new FileReader(file);
+
+        BufferedReader reader = new BufferedReader(fr);
+
+        String line = reader.readLine();
         while (line != null) {
             x = Double.parseDouble(line.substring(8, 10));
             y = Double.parseDouble(line.substring(11));
@@ -138,11 +140,11 @@ linear();
 
         for (int i = 0; i < X.size(); i++) {
             sum_x += X.get(i);
-            sum_y += X.get(i);
-            sum_xx += X.get(i) * X.get(i);
-            sum_xy += X.get(i) * Y.get(i);
-            sum_yy += Y.get(i) * Y.get(i);
-        }
+        sum_y += X.get(i);
+        sum_xx += X.get(i) * X.get(i);
+        sum_xy += X.get(i) * Y.get(i);
+        sum_yy += Y.get(i) * Y.get(i);
+    }
         double a, b;
         b = (sum_xy * sum_x - sum_y * sum_xx) / (sum_x * sum_x - X.size() * sum_xx);
         a = (sum_y - X.size() * b) / sum_x;
@@ -370,6 +372,7 @@ linear();
     }
 
 }
+
 
 
 
