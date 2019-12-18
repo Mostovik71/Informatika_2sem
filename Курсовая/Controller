@@ -110,28 +110,13 @@ dbHandler.getUser(user);
         stage.setScene(new Scene(root));
         stage.show();
 }
-    @FXML
-    public void fileDownload(){
-        try {
-            URL url = new URL("https://raw.githubusercontent.com/Mostovik71/Informatika_2sem/master/values.csv");
-            InputStream inputStream = url.openStream();
-            File file=new File("C:\\Users\\mosto\\Desktop\\Values.csv");
-            if(!file.exists()) {
-                Files.copy(inputStream, new File("C:\\Users\\mosto\\Desktop\\Values.csv").toPath());
-            }else{
-                System.out.println("Файл уже существует");
-            }
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
+
 
     @FXML
     void ex(ActionEvent actionEvent) {
         Stage menustage = (Stage) exit.getScene().getWindow();
         menustage.close();
     }
-
 }
+
+
