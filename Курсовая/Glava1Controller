@@ -1,4 +1,5 @@
 package sample;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -44,6 +45,7 @@ import java.util.Collections;
 import javafx.stage.Stage;
 
 import javax.swing.*;
+
 public class Glava1Controller {
     @FXML
     private Button bck2;
@@ -64,33 +66,33 @@ public class Glava1Controller {
     @FXML
     AnchorPane pane;
     @FXML
- Canvas canvas;
+    Canvas canvas;
 
-void close(){
+    void close() {
 
-}
+    }
 
     public Glava1Controller() throws IOException {
     }
 
 
-    public void GraphBorders(){
-    xAxis.setAutoRanging(false);
-    xAxis.setLowerBound(-1);
-    xAxis.setUpperBound(20);
-    xAxis.setTickUnit(10);
-    yAxis.setAutoRanging(false);
-    yAxis.setLowerBound(-100);
-    yAxis.setUpperBound(100);
-    yAxis.setTickUnit(10);
-}
+    public void GraphBorders() {
+        xAxis.setAutoRanging(false);
+        xAxis.setLowerBound(-1);
+        xAxis.setUpperBound(20);
+        xAxis.setTickUnit(10);
+        yAxis.setAutoRanging(false);
+        yAxis.setLowerBound(-100);
+        yAxis.setUpperBound(100);
+        yAxis.setTickUnit(10);
+    }
+
     ArrayList<Double> X = new ArrayList<>();
     ArrayList<Double> Y = new ArrayList<>();
     double x, y;
 
 
-
-    public void initialize() throws IOException{
+    public void initialize() throws IOException {
         File file = new File("C:\\Users\\mosto\\Desktop\\Values.csv");
 
         FileReader fr = new FileReader(file);
@@ -110,50 +112,52 @@ void close(){
 
     @FXML
     ComboBox<String> comboBoxRegression;
-    ObservableList<String> comboRegr = FXCollections.observableArrayList("Линейная аппроксимация","Квадратичная аппроксимация","Гиперболическая аппроксимация","Экспоненциальная аппроксимация");
+    ObservableList<String> comboRegr = FXCollections.observableArrayList("Линейная аппроксимация", "Квадратичная аппроксимация", "Гиперболическая аппроксимация", "Экспоненциальная аппроксимация");
 
 
     public void comboRegr() {
         comboBoxRegression.setItems(comboRegr);
     }
+
     public void buildRegr() throws IOException {
-        if (comboBoxRegression.getValue()=="Линейная аппроксимация") {
-linear();
+        if (comboBoxRegression.getValue() == "Линейная аппроксимация") {
+            linear();
         }
 
-            if (comboBoxRegression.getValue()=="Квадратичная аппроксимация") {
-               sqr();
-            }
-        if (comboBoxRegression.getValue()=="Гиперболическая аппроксимация") {
+        if (comboBoxRegression.getValue() == "Квадратичная аппроксимация") {
+            sqr();
+        }
+        if (comboBoxRegression.getValue() == "Гиперболическая аппроксимация") {
             hyp();
         }
-        if (comboBoxRegression.getValue()=="Экспоненциальная аппроксимация") {
+        if (comboBoxRegression.getValue() == "Экспоненциальная аппроксимация") {
             exp();
         }
 
     }
+
     @FXML
     public void linear() throws IOException {
         GraphBorders();
-    XYChart.Series series = new XYChart.Series();
+        XYChart.Series series = new XYChart.Series();
 
         double sum_x = 0, sum_y = 0, sum_xx = 0, sum_xy = 0, sum_yy = 0;
         //add();
 
         for (int i = 0; i < X.size(); i++) {
             sum_x += X.get(i);
-        sum_y += X.get(i);
-        sum_xx += X.get(i) * X.get(i);
-        sum_xy += X.get(i) * Y.get(i);
-        sum_yy += Y.get(i) * Y.get(i);
-    }
+            sum_y += X.get(i);
+            sum_xx += X.get(i) * X.get(i);
+            sum_xy += X.get(i) * Y.get(i);
+            sum_yy += Y.get(i) * Y.get(i);
+        }
         double a, b;
         b = (sum_xy * sum_x - sum_y * sum_xx) / (sum_x * sum_x - X.size() * sum_xx);
         a = (sum_y - X.size() * b) / sum_x;
         System.out.println("a=" + a);
         System.out.println("b=" + b);
         for (int i = 0; i < X.size(); i++) {
-            double y = a *X.get(i) +b;
+            double y = a * X.get(i) + b;
             series.getData().add(new XYChart.Data<>(X.get(i), y));
         }
 
@@ -198,7 +202,7 @@ linear();
         System.out.println("b=" + b);
         System.out.println("c=" + c);
         for (int i = 0; i < X.size(); i++) {
-            double y = a *X.get(i) *X.get(i) + b * X.get(i) + c;
+            double y = a * X.get(i) * X.get(i) + b * X.get(i) + c;
 
             series.getData().add(new XYChart.Data<>(X.get(i), y));
         }
@@ -212,11 +216,11 @@ linear();
         GraphBorders();
         XYChart.Series series = new XYChart.Series();
         double sum_lny = 0;
-        double  sum_lny_x=0;
+        double sum_lny_x = 0;
         double sum_x2 = 0;
         double sum_x = 0;
 
-       // add();
+        // add();
         for (int i = 1; i < Y.size(); i++) {
             sum_lny += Math.log(Y.get(i));
             sum_x2 += i * i;
@@ -224,13 +228,13 @@ linear();
             sum_lny_x += Math.log(Y.get(i)) * i;
         }
 
-        double a = (sum_lny * sum_x2 - sum_lny_x*sum_x) / (Y.size() * sum_x2- sum_x*sum_x);
-        double b = (Y.size() * sum_lny_x - sum_lny * sum_x) / (Y.size() * sum_x2- sum_x*sum_x);
+        double a = (sum_lny * sum_x2 - sum_lny_x * sum_x) / (Y.size() * sum_x2 - sum_x * sum_x);
+        double b = (Y.size() * sum_lny_x - sum_lny * sum_x) / (Y.size() * sum_x2 - sum_x * sum_x);
         System.out.println("a=" + a);
         System.out.println("b=" + b);
 
         for (int i = 0; i < X.size(); i++) {
-            double y = Math.exp(a) * Math.exp(b*X.get(i));
+            double y = Math.exp(a) * Math.exp(b * X.get(i));
             series.getData().add(new XYChart.Data<>(X.get(i), y));
         }
         series.setName("Экспоненциальная аппроксимация");
@@ -247,7 +251,7 @@ linear();
         double sum_1_x = 0;
         double sum_y = 0;
         double sum_1_x2 = 0;
-       // add();
+        // add();
         for (int i = 0; i < Y.size(); i++) {
             if (i != 0) {
                 sum_1_x += 1 / (i);
@@ -261,7 +265,7 @@ linear();
         System.out.println("a=" + a);
         System.out.println("b=" + b);
         for (int i = 0; i < X.size(); i++) {
-            double y = a+b/X.get(i);
+            double y = a + b / X.get(i);
             series.getData().add(new XYChart.Data<>(X.get(i), y));
         }
         series.setName("Гиперболическая аппроксимация");
@@ -269,28 +273,29 @@ linear();
         lineChart.setCreateSymbols(false);
 
     }
-@FXML
+
+    @FXML
     public void monthGraph() throws IOException {
-    GraphBorders();
-    XYChart.Series series = new XYChart.Series();
-    series.setName("График");
-   // add();
-    for (int i = 0; i < X.size(); i++) {
-        series.getData().add(new XYChart.Data<>(X.get(i), Y.get(i)));
-    }
-    lineChart.getData().add(series);
-    Node line1 = series.getNode().lookup(".chart-series-line");
-    Color color = Color.valueOf(String.valueOf(colorPicker.getValue()));
-    String rgb = String.format("%d, %d, %d",
-            (int) (color.getRed() * 255),
-            (int) (color.getGreen() * 255),
-            (int) (color.getBlue() * 255));
-    line1.setStyle("-fx-stroke: rgba(" + rgb + ", 1.0);");
-    lineChart.setCreateSymbols(false);
+        GraphBorders();
+        XYChart.Series series = new XYChart.Series();
+        series.setName("График");
+        // add();
+        for (int i = 0; i < X.size(); i++) {
+            series.getData().add(new XYChart.Data<>(X.get(i), Y.get(i)));
+        }
+        lineChart.getData().add(series);
+        Node line1 = series.getNode().lookup(".chart-series-line");
+        Color color = Color.valueOf(String.valueOf(colorPicker.getValue()));
+        String rgb = String.format("%d, %d, %d",
+                (int) (color.getRed() * 255),
+                (int) (color.getGreen() * 255),
+                (int) (color.getBlue() * 255));
+        line1.setStyle("-fx-stroke: rgba(" + rgb + ", 1.0);");
+        lineChart.setCreateSymbols(false);
     }
 
     @FXML
-    public void clear(){
+    public void clear() {
         XYChart.Series series = new XYChart.Series();
         series.getData().removeAll(Collections.singleton(lineChart.getData().setAll()));
 
@@ -299,7 +304,7 @@ linear();
 
 
     @FXML
-    void calculator(){
+    void calculator() {
         String[] selectionValues = {"$", "€", "Руб"};
         String initialSelectionValue = null;
         String userCurrency = (String) JOptionPane.showInputDialog(null, "Какая валюта вам нужна?",
@@ -311,24 +316,24 @@ linear();
         JOptionPane.showMessageDialog(null, "При конвертации " + result + userData + " в " + userCurrency + " вы получите " + (course * result) + userCurrency);
     }
 
-    public void draw(){
-        GraphicsContext gc=canvas.getGraphicsContext2D();
-        canvas.setOnMouseDragged(e->
+    public void draw() {
+        GraphicsContext gc = canvas.getGraphicsContext2D();
+        canvas.setOnMouseDragged(e ->
         {
             double size = Double.parseDouble(brushSize.getText());
-            double x = e.getX() - size/2;
-            double y = e.getY() - size/2;
+            double x = e.getX() - size / 2;
+            double y = e.getY() - size / 2;
 
-            if (eraser.isSelected()){
-                gc.clearRect(x,y,size,size);
-            }
-            else{
+            if (eraser.isSelected()) {
+                gc.clearRect(x, y, size, size);
+            } else {
                 gc.setFill(colorPicker.getValue());
-                gc.fillRect(x,y,size,size);
+                gc.fillRect(x, y, size, size);
             }
         });
 
     }
+
     @FXML
     void dbopen(ActionEvent actionEvent) {
         FXMLLoader loader = new FXMLLoader();
@@ -374,6 +379,7 @@ linear();
     }
 
 }
+
 
 
 
