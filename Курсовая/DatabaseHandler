@@ -73,18 +73,20 @@ getDbConnection();
 
 @FXML
 public void flrd() throws IOException {
-    File file = new File("C:\\Users\\mosto\\Desktop\\Values.csv");
+    FXMLLoader loader = new FXMLLoader();
+    loader.setLocation(getClass().getResource("/sample/table.fxml"));
 
-    FileReader fr = new FileReader(file);
-
-    BufferedReader reader = new BufferedReader(fr);
-
-    String line = reader.readLine();
-    while (line != null) {
-        System.out.println(line);
-        line = reader.readLine();
+    try {
+        loader.load();
+    } catch (IOException e) {
+        e.printStackTrace();
     }
-}
+    Parent root = loader.getRoot();
+    Stage stage = new Stage();
+    stage.setScene(new Scene(root));
+    stage.show();
+    }
+
 
     @FXML
     public void fileDownload(){
@@ -150,5 +152,6 @@ String x,y;
 
 
     }
+
 
 
